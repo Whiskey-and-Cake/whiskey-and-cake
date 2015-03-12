@@ -1,4 +1,5 @@
 /* CSS declarations go here */
+<<<<<<< HEAD
 .card {
   background-color: black;
   color: white;
@@ -16,3 +17,14 @@
 h3 { 
   text-align: center;
 }
+=======
+#login-buttons a {
+    background-color: white;
+    text-decoration: none;
+    color: black;
+}
+
+.btn-default:hover {
+    background-color: white;
+}
+>>>>>>> (feat) change styling on sign in button

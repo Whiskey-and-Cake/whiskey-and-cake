@@ -1,16 +1,21 @@
 <head>
-  <title>cardsagainstsobriety</title>
+  <title>CAS</title>
 </head>
 
 <body>
-  <h1>Welcome to Meteor!</h1>
+  <h1>Cards Against Sobriety</h1>
 
-{{> blackCard}}
+  <button type="button" class="btn btn-default">
+      {{> loginButtons}}
+  </button>
 
+  <div>Hello,
+      {{#if user}}
+        {{user}}
+      {{else}}
+        Stranger
+      {{/if}}
+  </div>
+
+  {{> blackCard}}
 </body>
-
-<template name="hello">
-  <button>Click Me</button>
-  <p>You've pressed the button {{counter}} times.</p>
-</template>
-
