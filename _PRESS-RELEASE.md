@@ -17,30 +17,29 @@ Once the project moves into development, the press release can be used as a touc
  -->
  
 ## Heading ##
-  > Name the product in a way the reader (i.e. your target customers) will understand.
-  Cards Against Productivity
+  Cards Against Sobriety
 
 ## Sub-Heading ##
-  > Describe who the market for the product is and what benefit they get. One sentence only underneath the title.
-  All those against productivity. Preferably with something better to do.
+  All those against sobriety, preferably with something better to drink.
 
 ## Summary ##
-  > Give a summary of the product and the benefit. Assume the reader will not read anything else so make this paragraph good.
+  Cards against humanity without the humanity. Or apples to apples for grown-ups planning to get tipsy(read: no)/drunk/schwasted/totally blacked. Still no? Then here: the game is simple. Each round, one player asks a question from a Black Card, and everyone else answers with their funniest White Card.
 
 ## Problem ##
-  > Describe the problem your product solves.
+  So I hear you asking yourself, why not just play cards against humanity? Again, it's simple: you don't have the fucking deck, you don't have any friends, or both. 
 
 ## Solution ##
-  > Describe how your product elegantly solves the problem.
+  Hop on Cards Against Sobriety, play with your 'friends' while hanging out with your one true love(read: booze, duh), and have a damn drunk time.
 
 ## Quote from You ##
-  > A quote from a spokesperson in your company.
+ "Fuck off, I'm playing Cards Against Sobriety."
 
 ## How to Get Started ##
-  > Describe how easy it is to get started.
+  http://www.cards.meteor.com   <-- that might not be the site, so maybe try, I dunno, Google. Oh, Bing, you say?
+  Then don't play our fucking game.
 
 ## Customer Quote ##
-  > Provide a quote from a hypothetical customer that describes how they experienced the benefit.
+  "WOOOOOOOO!!!!!"
 
 ## Closing and Call to Action ##
-  > Wrap it up and give pointers where the reader should go next.
+  I'm impressed you read this far, or am I? Hint: I'm not. Go play the damn game.
