@@ -3,7 +3,7 @@
  */
 
 // omit the var so the variable is available outside the file
-BlackDeck = new Meteor.Collection('blackDeck');
+BlackDeck = new Meteor.Collection('BlackDeck');
 
 // Database methods available
 // BlackDeck.insert();
