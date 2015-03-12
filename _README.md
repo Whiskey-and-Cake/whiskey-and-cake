@@ -4,9 +4,9 @@
 
 ## Team
 
-  - __Product Owner__: teamMember
-  - __Scrum Master__: teamMember
-  - __Development Team Members__: teamMember, teamMember
+  - __Product Owner__: Kate Jefferson
+  - __Scrum Master__: David Blanchard
+  - __Development Team Members__: Sean Kim, John Games
 
 ## Table of Contents
 
