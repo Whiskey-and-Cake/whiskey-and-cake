@@ -1,0 +1,18 @@
+<template name="playerHand">
+  <div class="playerHand container">
+    <h4>Your Score: {{> currentUser.score}}</h4>
+      <div class="answerCards">
+        <ul>
+          {{#each whiteCards.currentUser}}
+            <li>
+              {{> whiteCard.front}}
+            </li>
+          {{/each}}
+        </ul>
+      </div>
+      
+      <div class="questionCards">
+        <!-- This is where we can put each of the cards a user has 'won' -->
+      </div>
+  </div>
+</template>  
