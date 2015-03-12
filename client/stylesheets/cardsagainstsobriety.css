@@ -1,1 +1,18 @@
 /* CSS declarations go here */
+.card {
+  background-color: black;
+  color: white;
+  width: 200px;
+  height: 300px;
+  box-shadow: 10px 10px 5px #888888;
+}
+
+.card-content {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+h3 { 
+  text-align: center;
+}
