@@ -3,3 +3,5 @@
  */
 
 WhiteDeck = new Meteor.Collection("WhiteDeck");
+
+ShuffledWhiteDeck = new Meteor.Collection("ShuffledWhiteDeck");
