@@ -3,39 +3,42 @@
  * Cmd line if meteor running on port 3000 already.
  * kill -9 `ps ax | grep node | grep meteor | awk '{print $1}'`
  */
-
+var _incrementBlack = 0;
 if (BlackDeck.find().count() === 0) {
   for (var i=0; i<CardsMaster.length; i++) {
     if (CardsMaster[i]["cardType"] === "Black") {
       BlackDeck.insert({
-        no: i,
+        no: _incrementBlack,
         text: CardsMaster[i]["text"],
         expansion: CardsMaster[i]["expansion"]
       });
+      _incrementBlack++;
     }
   }
 }
 
+var _incrementWhite = 0;
 if (WhiteDeck.find().count() === 0) {
   for (var i=0; i<CardsMaster.length; i++) {
     if (CardsMaster[i]["cardType"] === "White") {
       WhiteDeck.insert({
-        no: i,
+        no: _incrementWhite,
         text: CardsMaster[i]["text"],
         expansion: CardsMaster[i]["expansion"]
       });
+      _incrementWhite++;
     }
   }
 }
 
 // Empty Shuffled Deck prior to each game
 ShuffledBlackDeck.remove({});
-ShuffledWhiteDeck.remote({});
+ShuffledWhiteDeck.remove({});
 
 // Instantiate Shuffled Deck prior to each game
-var _countBlack = BlackDeck.find().count();
-var _countWhite = WhiteDeck.find().count();
-var _key;
+var _countBlack = BlackDeck.find().count(); //275
+var _countWhite = WhiteDeck.find().count(); //1047
+var _key, _entry;
 
 var newKey = function(count) {
   return Math.floor(Math.random() * count);
@@ -44,25 +47,27 @@ var newKey = function(count) {
 // Black Deck
 _key = newKey(_countBlack);
 for (var i=0; i<_countBlack; i++) {
-  while (ShuffledBlackDeck.find({no: _key})) {
+  while (ShuffledBlackDeck.findOne({no: _key})) {
     _key = newKey(_countBlack);
   }
-    ShuffledBlackDeck.insert({
-      no: i,
-      text: BlackDeck[_key]["text"],
-      expansion: BlackDeck[_key]["expansion"]
-    });
+  _entry = BlackDeck.findOne({no: i});
+  ShuffledBlackDeck.insert({
+    no: _key,
+    text: _entry.text,
+    expansion: _entry.expansion
+  });
 }
 
 // White Deck
 _key = newKey(_countWhite);
-for (var i=0; i<_countBlack; i++) {
-  while (ShuffledWhiteDeck.find({no: _key})) {
+for (var i=0; i<_countWhite; i++) {
+  while (ShuffledWhiteDeck.findOne({no: _key})) {
     _key = newKey(_countWhite);
   }
-    ShuffledWhiteDeck.insert({
-      no: i,
-      text: WhiteDeck[_key]["text"],
-      expansion: WhiteDeck[_key]["expansion"]
-    });
+  _entry = WhiteDeck.findOne({no: i});
+  ShuffledWhiteDeck.insert({
+    no: _key,
+    text: _entry.text,
+    expansion: _entry.expansion
+  });
 }
