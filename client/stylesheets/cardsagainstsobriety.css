@@ -34,3 +34,19 @@ h3 {
 .btn-default:hover {
     background-color: white;
 }
+
+h1 { 
+  text-align: center;
+}
+
+.text { 
+  text-align: center;
+}
+
+.questionCard {
+  float: left;
+}
+
+.answerCards {
+  float: right;
+}
