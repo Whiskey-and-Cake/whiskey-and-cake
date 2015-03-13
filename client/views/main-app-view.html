@@ -21,12 +21,12 @@
       <h3>Number of cards - </h3>
         <p class="text">
         <!-- need a helper function that determines cardsPlayed during each round -->
-          In play: {{cardsPLayed}}
+          In play: {{round.cardsPlayed}}
         </p>
         <p class="text">
         <!-- need a helper function that determines cardsLeft during each round
         ie: cardsLeft = (users -1 - cardsPlayed) need to remember to subtract 1 to account for the judge -->
-          Left to be played: {{cardsLeft}}
+          Left to be played: {{round.cardsLeft}}
           <!-- create a listener that checks for when cardsLeft === 0, initiate judge's turn to pick, then end of round. -->
         </p>
     </div>
