@@ -1,8 +1,7 @@
-/**
- * Created by kate on 3/12/15.
- * Cmd line if meteor running on port 3000 already.
- * kill -9 `ps ax | grep node | grep meteor | awk '{print $1}'`
- */
+//Cmd line if meteor running on port 3000 already.
+//kill -9 `ps ax | grep node | grep meteor | awk '{print $1}'`
+
+/* DECK INSTANTIATION */
 
 // in-place shuffle algorithm for CardsMaster
 for (var i=0; i<CardsMaster.length; i++) {
@@ -42,3 +41,21 @@ if (WhiteDeck.find().count() === 0) {
     }
   }
 }
+
+/* PLAYER HAND INSTANTIATION */
+
+// Add 10 cards to player hand from top of shuffle db (first 10)
+// Remove them from original deck
+
+if (PlayerHand.find().count() === 0) {
+  for (var i=0; i<10; i++) {
+    var _entry = WhiteDeck.findOne({}, {no: 1});
+    var _id = _entry.no;
+    PlayerHand.insert({
+      text: _entry.text,
+      expansion: _entry.expansion
+    });
+    WhiteDeck.remove({no: _id});
+  }
+}
+
