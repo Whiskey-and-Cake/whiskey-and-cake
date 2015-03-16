@@ -1,11 +1,12 @@
 <template name="playerHand">
+<h1 class="testing123">ZIPZAPZOP</h1>
   <div class="playerHand container">
-    <h4>Your Score: {{> currentUser.score}}</h4>
+    <h4>Your Score: {{currentUser.score}}</h4>
       <div class="answerCards">
         <ul>
-          {{#each whiteCards.currentUser}}
+          {{#each handCards}}
             <li>
-              {{> whiteCard.front}}
+              {{text}}
             </li>
           {{/each}}
         </ul>

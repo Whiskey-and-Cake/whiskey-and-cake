@@ -1,6 +1,9 @@
 <template name="gameBoard">
   <h1>Welcome to Cards Against Sobriety <br>Let's get DRUNK!</h1>
 
+  <h1>Testing testing - {{ test }}</h1>
+  <h1>Testing testing - {{ currentUser.username }}</h1>
+
   <div class="gameBoard container">
     <div class="scoreboard">
     <!-- Display all user scores -->
@@ -34,15 +37,16 @@
 
     <div class="answerCards">
       <ul>
+        <li>{{> whiteCard}}</li>
       <!-- Only display white.card front to the user if they are currently the 'judge' -->
-        {{#each whiteCards.played}}
+        {{#each WhiteCards}}
           {{#if currentUser.judge}}
             <li>
               {{> whiteCard.front}}
             </li>
           {{else}}
             <li>
-              {{> whiteCard.back}}
+              {{> whiteCard}}
             </li>
           {{/if}}        
         {{/each}}

@@ -2,6 +2,8 @@ Template.playerHand.helpers({
   
 });
 
+// player = Meteor.user()
+player = Meteor.user()
 Template.gameBoard.helpers({
   
   // allows the judge to pick the winning white card for the round  
@@ -25,4 +27,22 @@ Template.gameBoard.helpers({
   //       // round: {cardsPlayed: 0, cardsLeft: x, blackCard: blackCard, whiteCards: [whiteCards]}
   //   }
   // }
+
+  // deal: function(){
+
+  // }
+  test: player.username,
+
+  board: []
+
+  // player: Meteor.user().username
+    // username: Meteor.user().username
+
+  // round: {
+  //   cardsPlayed: 0,
+  //   cardsLeft: (users - cardsPlayed),
+  //   // judge: userId,
+  //   cardsOnBoard: [whiteCard, whiteCard1]
+  // }
+
 })
