@@ -5,7 +5,6 @@
 // omit the var so the variable is available outside the file
 BlackDeck = new Meteor.Collection('BlackDeck');
 
-ShuffledBlackDeck = new Meteor.Collection('ShuffledBlackDeck');
 
 //Meteor.publish('AllBlackCards', function() {
 //  //return BlackDeck.find();
