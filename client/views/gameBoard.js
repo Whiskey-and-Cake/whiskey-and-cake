@@ -1,18 +1,28 @@
 
+Leaderboard = {};
+
+var names = [
+  'Ada Lovelace',
+  'Grace Hopper',
+  'Marie Curie',
+  'Carl Friedrich Gauss',
+  'Nikola Tesla',
+  'Claude Shannon'
+  ];
+
 Template.gameBoard.helpers({
 
   users: function(){
     return Meteor.users.find();
   },
 
-  judge: function(){
-    var user = Meteor.user()
-    var current = CurUsers.find({username: user.username})
-    return current.judge;
+  Competition: function(){
+    return Competition.find();
   },
 
-  current: function(){
-    return CurUsers.find();
+  judge: function(){
+    var user = Meteor.user()
+    return round.judge.username === user.username;
   },
   
   whites: function(){
@@ -42,6 +52,17 @@ Template.gameBoard.events({
   "click .playedWhite": function(){
     var id = this._id;
     BoardWhites.remove({_id: id});
+  },
+
+  "click .pickWinner": function(){
+    var user = this.playedBy;
+    
+    Scoreboard.update({user: {score: 1}})
+    console.log('USER - ', Scoreboard.find({user: user}))
+  },
+
+  "click .scoreIt": function(){
+    Competition.insert({name: "David", score: 0})
   }
 })
 

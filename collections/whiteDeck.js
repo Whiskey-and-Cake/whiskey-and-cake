@@ -4,8 +4,8 @@ PlayerHand = new Meteor.Collection("PlayerHand");
 
 BoardWhites = new Meteor.Collection("BoardWhites");
 
-CurUsers = new Meteor.Collection("CurUsers");
+// Scoreboard = new Meteor.Collection("Scoreboard");
 
-
+Competition = new Meteor.Collection("Competition");
 
 
