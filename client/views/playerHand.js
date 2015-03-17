@@ -19,9 +19,19 @@ Template.playerHand.events({
 
   },
 
+  //  Plays a card from the playerHand
+  //  Removes that card from the playerHand
+  //  draws a new card from the whiteDeck
+  //  removes that card from the whiteDeck
   "click .testing123": function(){
     var user = Meteor.user()
     console.log("this - ", user)
+
+    if(BoardWhites.find({playedBy: user.username}).count() > 0){
+      var what = BoardWhites.find({playedBy: user.username})
+      console.log('getting played  - ', what.count())
+      return;
+    }
 
     var test = {
       cardType: this.cardType,
