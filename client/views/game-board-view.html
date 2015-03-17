@@ -1,7 +1,6 @@
 <template name="gameBoard">
-  <h1>Welcome to Cards Against Sobriety <br>Let's get DRUNK!</h1>
+  <h1>Welcome to Cards Against Sobriety</h1>
 
-  <h1>Testing testing - {{ test }}</h1>
   <h1>Testing testing - {{ currentUser.username }}</h1>
 
   <div class="gameBoard container">
@@ -20,26 +19,33 @@
       <h3>Number of cards - </h3>
         <p class="text">
         <!-- need a helper function that determines cardsPlayed during each round -->
-          In play: {{round.cardsPlayed}}
+          In play: {{cardsPlayed}}
         </p>
         <p class="text">
         <!-- need a helper function that determines cardsLeft during each round
         ie: cardsLeft = (users -1 - cardsPlayed) need to remember to subtract 1 to account for the judge -->
-          Left to be played: {{round.cardsLeft}}
+          Left to be played: {{cardsLeft}}
           <!-- create a listener that checks for when cardsLeft === 0, initiate judge's turn to pick, then end of round. -->
         </p>
     </div>
 
     <div class="questionCard">
     <!-- Display current question card for all players to see -->
-      {{> blackCard}}
+      <!-- {{> blackCard}} -->
     </div>
 
     <div class="answerCards">
       <ul>
-        <li>{{> whiteCard}}</li>
+        {{#each whites}}
+          <!-- <li>{{> whiteCard}}</li> -->
+          <li class="playedWhite">{{text}}</li>
+          <!-- <span>ID - {{_id}}</span> -->
+          <span>User Id - {{playedBy}}</span><br>
+          <span>Card Id - {{this._id}}</span>
+        {{/each}}
       <!-- Only display white.card front to the user if they are currently the 'judge' -->
-        {{#each WhiteCards}}
+
+        <!-- {{#each WhiteCards}}
           {{#if currentUser.judge}}
             <li>
               {{> whiteCard.front}}
@@ -49,7 +55,8 @@
               {{> whiteCard}}
             </li>
           {{/if}}        
-        {{/each}}
+        {{/each}} -->
+
       </ul>
     </div>
   </div>
