@@ -1,7 +1,9 @@
 
 Template.playerHand.helpers({
     // userId: userId,
-
+  player: function(){
+    return Meteor.user()
+  },  
 
   playsHand: function(){
     return PlayerHand.find({})
@@ -12,20 +14,38 @@ Template.playerHand.helpers({
 Template.playerHand.events({
 
   "click .clearBoard": function(){
-    var hey = BoardWhites.find({});
-    console.log('heyo - ', hey)
-    // hey.remove();
-    // BoardWhites.find({}).remove();
+    var hey = Meteor.users.find();
+    var balls = [];
+    var judge = false;
 
+    // Tasks.update(taskId, { $set: { private: setToPrivate } });
+
+    hey.forEach(function(dude){
+      if(!judge){
+        judge = true;
+        CurUsers.update({
+          username: dude._id,
+          judge: true
+        })
+      } else {
+        CurUsers.update({
+          username: dude._id,
+          judge: false
+        })
+      }
+    });
+
+    console.log('righto - ', CurUsers)
   },
 
   //  Plays a card from the playerHand
   //  Removes that card from the playerHand
   //  draws a new card from the whiteDeck
   //  removes that card from the whiteDeck
+  //  can't play a card if user currently has one in play
   "click .testing123": function(){
     var user = Meteor.user()
-    console.log("this - ", user)
+    console.log("this - ", user.judge)
 
     if(BoardWhites.find({playedBy: user.username}).count() > 0){
       var what = BoardWhites.find({playedBy: user.username})

@@ -9,6 +9,7 @@ if (Meteor.isClient) {
     user: function() {
       return Meteor.user().username;
     }
+
   })
 }
 
