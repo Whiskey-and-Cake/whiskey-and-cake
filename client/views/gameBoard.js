@@ -1,13 +1,30 @@
 // Leaderboard = {};
 // Leaderboard = [];
+
+possJudges = [];
+judgeIndex = 0;
+
+judgename = "dbdb";
+
 Template.gameBoard.helpers({
 
   users: function(){
     return Meteor.users.find({});
   },
+
+  question: function(){
+    return GameBoard.find({black: true});
+  },
   
-  whites: function(){
-    return BoardWhites.find({});
+  answers: function(){
+    // return BoardWhites.find({});
+    return GameBoard.find({black: false});
+  },
+
+  judge: function(){
+    var user = Meteor.user();
+    var username = user.username;
+    return username === judgename;
   },
 
   numPlayers: function(){
@@ -26,10 +43,9 @@ Template.gameBoard.helpers({
       if(Cheaters.findOne({username: user.username})){
         return;
       } else {
-        Cheaters.insert({username: user.username, score: 0})
+        Cheaters.insert({username: user.username, score: 0});
       }
     })
-
     return Cheaters.find();
   },
 
@@ -54,7 +70,7 @@ Template.gameBoard.helpers({
 Template.gameBoard.events({
   "click .playedWhite": function(){
     var id = this._id;
-    BoardWhites.remove({_id: id});
+    GameBoard.remove({_id: id});
   },
 
   "click .pickWinner": function(){

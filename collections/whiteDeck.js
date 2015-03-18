@@ -17,13 +17,15 @@ Meteor.methods({
   // initially took an argument 'PlayerHand'
   // Think the argument will probably need to be user_id, or something along those lines.
   dealHand: function() {
+    var user = Meteor.user();
     for (var i = 0; i < 10; i++) {
       var _entry = WhiteDeck.findOne({}, {no: 1});
       var _id = _entry.no;
       PlayerHand.insert({
         no: _entry.no,
         text: _entry.text,
-        expansion: _entry.expansion
+        expansion: _entry.expansion,
+        owner: user.username
       });
       WhiteDeck.remove({no: _id});
     }

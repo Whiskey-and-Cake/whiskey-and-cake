@@ -42,20 +42,22 @@
     </div>
 
     {{#if judge}}
-    <h3>You're the Motha Fuckin' JUDGE</h3>
+      <h3>You're the Motha Fuckin' JUDGE</h3>
     {{/if}}
 
     <div class="cardsInPlay">
     <!-- Contains all cards currently in play -->
       <div class="questionCard">
       <!-- Display current question card for all players to see -->
-        {{> blackCard}}    
+        {{#each question}}
+          {{> blackCard}}
+        {{/each}}
       </div>
 
       <div class="answerCards">
       <!-- Display all currently played answer cards -->
         <ul>
-          {{#each whites}}        
+          {{#each answers}}        
             <li class="playedWhite">{{text}}</li>
 
             <!-- {{#if judge}} -->
