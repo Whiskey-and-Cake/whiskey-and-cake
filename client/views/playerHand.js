@@ -58,12 +58,18 @@ Template.playerHand.events({
       return;
     }
 
-    var cardToPlay = { cardType: this.cardType, text: this.text, expansion: this.expansion, playedBy: user.username }
+    //var cardToPlay = { cardType: this.cardType, text: this.text, expansion: this.expansion, playedBy: user.username }
+    //
+    //var id = this._id
+    //
+    //PlayerHand.remove({_id: id});
+    //GameBoard.insert({cardType: cardToPlay.cardType, text: cardToPlay.text, expansion: cardToPlay.expansion, black: false, playedBy: cardToPlay.playedBy});
 
-    var id = this._id
-
-    PlayerHand.remove({_id: id});
-    GameBoard.insert({cardType: cardToPlay.cardType, text: cardToPlay.text, expansion: cardToPlay.expansion, black: false, playedBy: cardToPlay.playedBy});
+    Meteor.call('playCard', this, function(err, id) {
+      if (err) {
+        throw err;
+      }
+    });
 
     Meteor.call('drawWhite', function(err, res){
       if(err){
@@ -85,12 +91,12 @@ Template.playerHand.events({
   // },
 
   // Doesn't work.
-  "click .resetPlayers": function(){
-    // delete all records from cheaters
-    console.log('Resetting players')
-    // Cheaters.drop();
-    delete Cheaters
-  },
+  //"click .resetPlayers": function(){
+  //  // delete all records from cheaters
+  //  console.log('Resetting players')
+  //  // Cheaters.drop();
+  //  delete Cheaters
+  //},
 
   "click .clearBoard": function(){
     // clear out white cards

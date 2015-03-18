@@ -34,26 +34,29 @@ Meteor.methods({
   // Also took the argument PlayerHand
   // Going to give it a go without 
   drawWhite: function() {
-    if (PlayerHand.find().count() < 10) {
-      var _entry = WhiteDeck.findOne({}, {no: 1});
-      var _id = _entry.no;
-      PlayerHand.insert({
-        no: _entry.no,
-        text: _entry.text,
-        expansion: _entry.expansion
-      });
-      WhiteDeck.remove({no: _id});
+    for (var i = 0; i<Meteor.users().count; i++) {
+      if (PlayerHand.find({}, {owner: Meteor.user().username}).count() < 10) {
+        var _entry = WhiteDeck.findOne({}, {no: 1});
+        var _id = _entry.no;
+        PlayerHand.insert({
+          no: _entry.no,
+          text: _entry.text,
+          expansion: _entry.expansion
+        });
+        WhiteDeck.remove({no: _id});
+      }
     }
   },
   // adds card to game board with the user id and removes from playerhand
-  playCard: function(hand, card, user) {
-    hand.remove({no: card.no});
+  // added username
+  playCard: function(card) {
+    PlayerHand.remove({no: card.no});
     GameBoard.insert({
       no: card.no,
       text: card.text,
       expansion: card.expansion,
       black: false,
-      user: user
+      owner: card.owner
     });
   },
   // this function starts a new hand by clearing the GameBoard and adding a black card
