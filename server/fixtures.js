@@ -42,35 +42,5 @@ if (WhiteDeck.find().count() === 0) {
   }
 }
 
-/* PLAYER HAND INSTANTIATION */
 
-// Add 10 cards to player hand from top of shuffle db (first 10)
-// Remove them from original deck
-
-DealHand = function() {
-  var _needed = 10-PlayerHand.find().count();
-  for (var i = 0; i < _needed; i++) {
-    var _entry = WhiteDeck.findOne({}, {no: 1});
-    var _id = _entry.no;
-    PlayerHand.insert({
-      text: _entry.text,
-      expansion: _entry.expansion
-    });
-    WhiteDeck.remove({no: _id});
-  }
-};
-
-/* DRAW CARDS */
-
-DrawCard = function() {
-  if (PlayerHand.find().count() < 10) {
-    var _entry = WhiteDeck.findOne({}, {no: 1});
-    var _id = _entry.no;
-    PlayerHand.insert({
-      text: _entry.text,
-      expansion: _entry.expansion
-    });
-    WhiteDeck.remove({no: _id});
-  }
-};
 
