@@ -33,24 +33,41 @@
       </div>
     </div>
 
-    <div class="questionCard">
-    <!-- Display current question card for all players to see -->
-      {{> blackCard}}    
+
+    <!-- Subtle line separating the cards in play on the board from the scoreboard -->
+    <div class='row'>
+      <div class='col-md-12'>
+        <hr>
+      </div>
     </div>
 
-    <div class="answerCards">
-      <ul>
-        {{#each whites}}        
-          <li class="playedWhite">{{text}}</li>
+    {{#if judge}}
+    <h3>You're the Motha Fuckin' JUDGE</h3>
+    {{/if}}
 
-          <!-- {{#if judge}} -->
-            <span>UserName - {{playedBy}}</span><br>
-            <button class="pickWinner">Choose</button>
-          <!-- {{/if}} -->
-        {{/each}}
+    <div class="cardsInPlay">
+    <!-- Contains all cards currently in play -->
+      <div class="questionCard">
+      <!-- Display current question card for all players to see -->
+        {{> blackCard}}    
+      </div>
 
-      </ul>
+      <div class="answerCards">
+      <!-- Display all currently played answer cards -->
+        <ul>
+          {{#each whites}}        
+            <li class="playedWhite">{{text}}</li>
+
+            <!-- {{#if judge}} -->
+              <span>UserName - {{playedBy}}</span><br>
+              <button class="pickWinner">Choose</button>
+            <!-- {{/if}} -->
+          {{/each}}
+
+        </ul>
+      </div>
     </div>
+      
   </div>
 
 </template>
