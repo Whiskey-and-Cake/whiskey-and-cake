@@ -8,15 +8,13 @@ PlayerHand = new Meteor.Collection("PlayerHand");
 // collection of all cards on the game table
 GameBoard = new Meteor.Collection("GameBoard");
 
-Scoreboard = new Meteor.Collection("Scoreboard");
 
+Scoreboard = new Meteor.Collection("Scoreboard");
 Cheaters = new Meteor.Collection("Cheaters");
 
 
 Meteor.methods({
   // function deals a player hand at the beginning of the game
-  // initially took an argument 'PlayerHand'
-  // Think the argument will probably need to be user_id, or something along those lines.
   dealHand: function() {
     for (var i = 0; i < 10; i++) {
       var _entry = WhiteDeck.findOne({}, {no: 1});
@@ -31,10 +29,8 @@ Meteor.methods({
     }
   },
   // replenishes white cards in the player's hand
-  // Also took the argument PlayerHand
-  // Going to give it a go without 
   drawWhite: function() {
-    for (var i = 0; i<Meteor.users().count; i++) {
+    for (var i = 0; i< 10-PlayerHand.find({}, {owner: Meteor.user().username}).count(); i++) {
       if (PlayerHand.find({}, {owner: Meteor.user().username}).count() < 10) {
         var _entry = WhiteDeck.findOne({}, {no: 1});
         var _id = _entry.no;
