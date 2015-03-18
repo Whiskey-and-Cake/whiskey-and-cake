@@ -19,7 +19,7 @@ Template.playerHand.events({
   //  removes that card from the whiteDeck
   //  can't play a card if user currently has one in play
   "click .playCard": function(){
-    var user = Meteor.user()
+    var user = Meteor.user();
 
     if(BoardWhites.find({playedBy: user.username}).count() > 0){
       var what = BoardWhites.find({playedBy: user.username})
