@@ -1,32 +1,33 @@
-
-Leaderboard = {};
-
-var names = [
-  'Ada Lovelace',
-  'Grace Hopper',
-  'Marie Curie',
-  'Carl Friedrich Gauss',
-  'Nikola Tesla',
-  'Claude Shannon'
-  ];
-
+// Leaderboard = {};
+// Leaderboard = [];
 Template.gameBoard.helpers({
 
   users: function(){
-    return Meteor.users.find();
-  },
-
-  Competition: function(){
-    return Competition.find();
-  },
-
-  judge: function(){
-    var user = Meteor.user()
-    return round.judge.username === user.username;
+    return Meteor.users.find({});
   },
   
   whites: function(){
     return BoardWhites.find({});
+  },
+
+  numPlayers: function(){
+    return Meteor.users.find().count()
+  },
+
+  playas: function(){
+    var users = Meteor.users.find({});
+    
+    users.forEach(function(user){
+      // console.log('user - ', user);
+      if(Cheaters.findOne({username: user.username})){
+        // console.log('Tryna double cheat me...')
+        return;
+      } else {
+        Cheaters.insert({username: user.username, score: 0})
+      }
+    })
+
+    return Cheaters.find();
   },
 
 // returns a count of all played cards on the board
@@ -34,7 +35,6 @@ Template.gameBoard.helpers({
     return BoardWhites.find({}).count()
   },
 
-// currently assumes 5 total players, but this can be amended later to take into account total number of users logged in
   cardsLeft: function(){
     var count = Meteor.users.find().count()
     return count - BoardWhites.find({}).count()
@@ -55,14 +55,12 @@ Template.gameBoard.events({
   },
 
   "click .pickWinner": function(){
-    var user = this.playedBy;
-    
-    Scoreboard.update({user: {score: 1}})
-    console.log('USER - ', Scoreboard.find({user: user}))
-  },
+    var playedBy = this.playedBy;
 
-  "click .scoreIt": function(){
-    Competition.insert({name: "David", score: 0})
+    var cheat = Cheaters.findOne({username: playedBy});
+    var id = cheat._id
+
+    Cheaters.update({_id: id}, {$inc: {score: 1}});
   }
 })
 

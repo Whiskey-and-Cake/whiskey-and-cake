@@ -5,14 +5,16 @@
     <div class="scoreboard">
     <!-- Display all user scores -->
       <h3>Scoreboard</h3>
+        <h4>Number of players - {{numPlayers}}</h4>
         <ul>
-          {{#each Competition}}
+          {{#each playas}}
             <li>
-                <strong>{{name}}</strong> - {{score}}
+                <strong>{{username}}</strong> - {{_id}} - Score? - {{score}}
             </li>
           {{/each}}
         </ul>
      
+
       <!-- Keep track of round progress -->
       {{#if roundOver}}
         <h3>ROUND OVER</h3>
@@ -33,9 +35,7 @@
 
     <div class="questionCard">
     <!-- Display current question card for all players to see -->
-      <!-- {{> blackCard}} -->
-      <h2 class="scoreIt">ScoreIt</h2>
-    
+      {{> blackCard}}    
     </div>
 
     <div class="answerCards">
@@ -43,25 +43,12 @@
         {{#each whites}}        
           <li class="playedWhite">{{text}}</li>
 
-          {{#if judge}}
-            <span>User Id - {{playedBy}}</span><br>
-            <span>Card Id - {{this._id}}</span>
+          <!-- {{#if judge}} -->
+            <span>UserName - {{playedBy}}</span><br>
+            <span>Card Id - {{this._id}}</span><br>
             <button class="pickWinner">Choose</button>
-          {{/if}}
+          <!-- {{/if}} -->
         {{/each}}
-      <!-- Only display white.card front to the user if they are currently the 'judge' -->
-
-        <!-- {{#each WhiteCards}}
-          {{#if currentUser.judge}}
-            <li>
-              {{> whiteCard.front}}
-            </li>
-          {{else}}
-            <li>
-              {{> whiteCard}}
-            </li>
-          {{/if}}        
-        {{/each}} -->
 
       </ul>
     </div>
