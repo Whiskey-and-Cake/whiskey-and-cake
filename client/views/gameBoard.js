@@ -51,17 +51,17 @@ Template.gameBoard.helpers({
 
 // returns a count of all played cards on the board
   cardsPlayed: function(){
-    return BoardWhites.find({}).count()
+    return GameBoard.find({}).count()
   },
 
   cardsLeft: function(){
     var count = Meteor.users.find().count()
-    return count - BoardWhites.find({}).count()
+    return count - GameBoard.find({}).count()
   },
 
   roundOver: function(){
     var players = Meteor.users.find().count();
-    var played = BoardWhites.find({}).count();
+    var played = GameBoard.find({}).count();
     return players - played === 0;
   }
 

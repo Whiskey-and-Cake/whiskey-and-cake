@@ -1,10 +1,11 @@
+// shuffled decks
 WhiteDeck = new Meteor.Collection("WhiteDeck");
 BlackDeck = new Meteor.Collection('BlackDeck');
 
+// collection with all user hands
 PlayerHand = new Meteor.Collection("PlayerHand");
 
-// game board is the replacement for board whites
-BoardWhites = new Meteor.Collection("BoardWhites");
+// collection of all cards on the game table
 GameBoard = new Meteor.Collection("GameBoard");
 
 Scoreboard = new Meteor.Collection("Scoreboard");
@@ -17,7 +18,6 @@ Meteor.methods({
   // initially took an argument 'PlayerHand'
   // Think the argument will probably need to be user_id, or something along those lines.
   dealHand: function() {
-    var user = Meteor.user();
     for (var i = 0; i < 10; i++) {
       var _entry = WhiteDeck.findOne({}, {no: 1});
       var _id = _entry.no;
@@ -25,7 +25,7 @@ Meteor.methods({
         no: _entry.no,
         text: _entry.text,
         expansion: _entry.expansion,
-        owner: user.username
+        owner: Meteor.user().username
       });
       WhiteDeck.remove({no: _id});
     }
@@ -34,26 +34,30 @@ Meteor.methods({
   // Also took the argument PlayerHand
   // Going to give it a go without 
   drawWhite: function() {
-    if (PlayerHand.find().count() < 10) {
-      var _entry = WhiteDeck.findOne({}, {no: 1});
-      var _id = _entry.no;
-      PlayerHand.insert({
-        no: _entry.no,
-        text: _entry.text,
-        expansion: _entry.expansion
-      });
-      WhiteDeck.remove({no: _id});
+    for (var i = 0; i<Meteor.users().count; i++) {
+      if (PlayerHand.find({}, {owner: Meteor.user().username}).count() < 10) {
+        var _entry = WhiteDeck.findOne({}, {no: 1});
+        var _id = _entry.no;
+        PlayerHand.insert({
+          no: _entry.no,
+          text: _entry.text,
+          expansion: _entry.expansion,
+          owner: Meteor.user().username
+        });
+        WhiteDeck.remove({no: _id});
+      }
     }
   },
   // adds card to game board with the user id and removes from playerhand
-  playCard: function(hand, card, user) {
-    hand.remove({no: card.no});
+  // added username
+  playCard: function(card) {
+    PlayerHand.remove({no: card.no});
     GameBoard.insert({
       no: card.no,
       text: card.text,
       expansion: card.expansion,
       black: false,
-      user: user
+      owner: card.owner
     });
   },
   // this function starts a new hand by clearing the GameBoard and adding a black card
@@ -65,6 +69,7 @@ Meteor.methods({
       no: _card.no,
       text: _card.text,
       expansion: _card.expansion,
+      owner: _card.owner,
       black: true
     });
     BlackDeck.remove({no: _id});
