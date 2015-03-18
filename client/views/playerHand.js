@@ -71,11 +71,12 @@ Template.playerHand.events({
       }
     });
 
-    Meteor.call('drawWhite', function(err, res){
-      if(err){
-        throw err;
-      } 
-    })
+    // problem with 'drawWhite'
+    //Meteor.call('drawWhite', function(err, res){
+    //  if(err){
+    //    throw err;
+    //  }
+    //})
 
   },
 
