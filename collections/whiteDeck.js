@@ -1,15 +1,10 @@
 WhiteDeck = new Meteor.Collection("WhiteDeck");
 
-DealHands = function() {
-  PlayerHand = new Meteor.Collection("PlayerHand");
-  Meteor.call('DealHand', function(err, res) {
-    Session.set('serverResponse', res);
-  });
-};
+PlayerHand = new Meteor.Collection("PlayerHand");
 
-DrawCards = function() {
-  Meteor.call('DrawCards', function(err, res) {
-    Session.set('serverResponse', res);
-  });
-};
+BoardWhites = new Meteor.Collection("BoardWhites");
+
+Scoreboard = new Meteor.Collection("Scoreboard");
+
+Cheaters = new Meteor.Collection("Cheaters");
 

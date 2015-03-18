@@ -1,28 +1,66 @@
-Template.playerHand.helpers({
-  
-});
-
+// Leaderboard = {};
+// Leaderboard = [];
 Template.gameBoard.helpers({
+
+  users: function(){
+    return Meteor.users.find({});
+  },
   
-  // allows the judge to pick the winning white card for the round  
-  // chooseWinner: function(whiteCard){
-  //   // only the judge for the round gets to choose the winner, and only if there are no cards left to be played for the round.
-  //   // not sure if this can check for judge-ship though.
+  whites: function(){
+    return BoardWhites.find({});
+  },
 
-  //   if( !Meteor.userId().judge && round.cardsLeft === 0) {
-  //     return;
-  //   } else {
-  //     // whatever user played the winning white card gets a point
-  //     user['whiteCard.userId']['score'] += 1;
+  numPlayers: function(){
+    return Meteor.users.find().count()
+  },
 
-  //     //the round is now over
-  //       // the judge property needs to rotate to the next user
-  //       // the board needs to be cleared
-  //       // 1 new white card needs to be dealt to each player aside from the previous judge
-  //       // a new black card must be drawn
-  //       // round.cardsPlayed & round.cardLeft need to be reset
-  //       // round can be an object
-  //       // round: {cardsPlayed: 0, cardsLeft: x, blackCard: blackCard, whiteCards: [whiteCards]}
-  //   }
-  // }
+  playas: function(){
+    var users = Meteor.users.find({});
+    
+    users.forEach(function(user){
+      // console.log('user - ', user);
+      if(Cheaters.findOne({username: user.username})){
+        // console.log('Tryna double cheat me...')
+        return;
+      } else {
+        Cheaters.insert({username: user.username, score: 0})
+      }
+    })
+
+    return Cheaters.find();
+  },
+
+// returns a count of all played cards on the board
+  cardsPlayed: function(){
+    return BoardWhites.find({}).count()
+  },
+
+  cardsLeft: function(){
+    var count = Meteor.users.find().count()
+    return count - BoardWhites.find({}).count()
+  },
+
+  roundOver: function(){
+    var players = Meteor.users.find().count();
+    var played = BoardWhites.find({}).count();
+    return players - played === 0;
+  }
+
 })
+
+Template.gameBoard.events({
+  "click .playedWhite": function(){
+    var id = this._id;
+    BoardWhites.remove({_id: id});
+  },
+
+  "click .pickWinner": function(){
+    var playedBy = this.playedBy;
+
+    var cheat = Cheaters.findOne({username: playedBy});
+    var id = cheat._id
+
+    Cheaters.update({_id: id}, {$inc: {score: 1}});
+  }
+})
+
