@@ -14,20 +14,26 @@ Cheaters = new Meteor.Collection("Cheaters");
 
 Meteor.methods({
   // function deals a player hand at the beginning of the game
-  dealHand: function(PlayerHand) {
+  // initially took an argument 'PlayerHand'
+  // Think the argument will probably need to be user_id, or something along those lines.
+  dealHand: function() {
+    var user = Meteor.user();
     for (var i = 0; i < 10; i++) {
       var _entry = WhiteDeck.findOne({}, {no: 1});
       var _id = _entry.no;
       PlayerHand.insert({
         no: _entry.no,
         text: _entry.text,
-        expansion: _entry.expansion
+        expansion: _entry.expansion,
+        owner: user.username
       });
       WhiteDeck.remove({no: _id});
     }
   },
   // replenishes white cards in the player's hand
-  drawWhite: function(PlayerHand) {
+  // Also took the argument PlayerHand
+  // Going to give it a go without 
+  drawWhite: function() {
     if (PlayerHand.find().count() < 10) {
       var _entry = WhiteDeck.findOne({}, {no: 1});
       var _id = _entry.no;

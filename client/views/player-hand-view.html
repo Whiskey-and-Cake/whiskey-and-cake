@@ -2,14 +2,16 @@
 <h1>Player Hand</h1>
   <div class="playerHand container">
     <h4>Your Score: {{player.username}}</h4>
-    <h4 class="clearBoard">CLEAR</h4>
-    <h4 class="resetPlayers">RESET</h4>
+    <button class="clearBoard">CLEAR</button>
+    <button class="dealHand">Deal</button>
+    <button class="rotateJudge">Rotate</button>
       <div class="answerCards">
         <h3>Your Hand</h3>
         <ul>
           {{#each playsHand}}
             <li class="playCard">
-              {{text}}
+              {{text}}<br>
+              {{owner}}
             </li>
           {{/each}}
         </ul>

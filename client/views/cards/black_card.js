@@ -1,12 +1,12 @@
-Template.blackCard.helpers({
-  //these functions are here because I don't have a card collection and just wanted to put something up on the template
-  text: function () {
-    return BlackCardData[0]['text'];
-  },
-  expansion: function () {
-    return BlackCardData[0]['expansion']
-  }
-});
+// Template.blackCard.helpers({
+//   //these functions are here because I don't have a card collection and just wanted to put something up on the template
+//   text: function () {
+//     return BlackCardData[0]['text'];
+//   },
+//   expansion: function () {
+//     return BlackCardData[0]['expansion']
+//   }
+// });
 
 //test cardData
 var BlackCardData = [
