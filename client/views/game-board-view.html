@@ -4,33 +4,33 @@
   <div class="gameBoard container">
     <div class="scoreboard">
     <!-- Display all user scores -->
-      <h3>Scoreboard</h3>
-        <h4>Number of players - {{numPlayers}}</h4>
-        <ul>
-          {{#each playas}}
-            <li>
-                <strong>{{username}}</strong> - {{_id}} - Score? - {{score}}
-            </li>
-          {{/each}}
-        </ul>
-     
-
-      <!-- Keep track of round progress -->
-      {{#if roundOver}}
-        <h3>ROUND OVER</h3>
-      {{else}}
-      <h3>Number of cards - </h3>
-        <p class="text">
-        <!-- need a helper function that determines cardsPlayed during each round -->
-          In play: {{cardsPlayed}}
-        </p>
-        <p class="text">
-        <!-- need a helper function that determines cardsLeft during each round
-        ie: cardsLeft = (users -1 - cardsPlayed) need to remember to subtract 1 to account for the judge -->
-          Left to be played: {{cardsLeft}}
-          <!-- create a listener that checks for when cardsLeft === 0, initiate judge's turn to pick, then end of round. -->
-        </p>
-        {{/if}}
+        <h3>Scoreboard</h3>
+      <div class="playerBoard">
+          <h4>Number of players - {{numPlayers}}</h4>
+          <ul>
+            {{#each playas}}
+              <li>
+                  <strong>{{username}}</strong> - Score: {{score}}
+              </li>
+            {{/each}}
+          </ul>      
+      </div>
+       
+      <div class="roundCounter">
+        <!-- Keep track of round progress -->
+        {{#if roundOver}}
+          <h4>ROUND OVER</h4>
+        {{else}}
+        <h4>Number of cards - </h4>
+          <p class="text">
+          <!-- need a helper function that determines cardsPlayed during each round -->
+            In play: {{cardsPlayed}}
+          </p>
+          <p class="text">
+            Left to be played: {{cardsLeft}}
+          </p>
+          {{/if}}      
+      </div>
     </div>
 
     <div class="questionCard">
@@ -45,7 +45,6 @@
 
           <!-- {{#if judge}} -->
             <span>UserName - {{playedBy}}</span><br>
-            <span>Card Id - {{this._id}}</span><br>
             <button class="pickWinner">Choose</button>
           <!-- {{/if}} -->
         {{/each}}
