@@ -6,9 +6,9 @@ Template.playerHand.helpers({
   },  
 
   playsHand: function(){
-    var user = Meteor.user()
+    var user = Meteor.user();
     // displays hand to user, filtered by username.
-    return PlayerHand.find({owner: user.username})
+    return PlayerHand.find({}, {owner: user.username})
   }
 
 });
@@ -52,9 +52,9 @@ Template.playerHand.events({
   "click .playCard": function(){
     var user = Meteor.user();
 
-    if(GameBoard.find({playedBy: user.username}).count() > 0){
-      var what = GameBoard.find({playedBy: user.username})
-      console.log('getting played  - ', what.count())
+    if(GameBoard.findOne({}, {playedBy: user.username}).count() > 0){
+      var what = GameBoard.findOne({}, {playedBy: user.username});
+      console.log('getting played  - ', what.count());
       return;
     }
 
@@ -72,11 +72,11 @@ Template.playerHand.events({
     });
 
     // problem with 'drawWhite'
-    //Meteor.call('drawWhite', function(err, res){
-    //  if(err){
-    //    throw err;
-    //  }
-    //})
+    Meteor.call('drawWhite', function(err, res){
+      if(err){
+        throw err;
+      }
+    })
 
   },
 
@@ -126,13 +126,13 @@ Template.playerHand.events({
   "click .rotateJudge": function(){
     // for testing judeg functionality
     // Will ideally be a part of the .clearBoard function above.
-    var users = Meteor.users.find({});
+    var users = Meteor.users.find();
     possJudges = [];
 
     users.forEach(function(user){
       possJudges.push(user.username);
-    })
-    console.log('possJudges... ', possJudges)
+    });
+    console.log('possJudges... ', possJudges);
     if(judgeIndex === possJudges.length){
       judgeIndex = 0;
     }
@@ -141,7 +141,7 @@ Template.playerHand.events({
     judgeIndex ++;
     console.log('new judgename - ', judgename);
 
-  },
+  }
 
 
 });

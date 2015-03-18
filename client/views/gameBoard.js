@@ -13,12 +13,12 @@ Template.gameBoard.helpers({
   },
 
   question: function(){
-    return GameBoard.find({black: true});
+    return GameBoard.find({}, {black: true});
   },
   
   answers: function(){
     // return BoardWhites.find({});
-    return GameBoard.find({black: false});
+    return GameBoard.find({}, {black: false});
   },
 
   judge: function(){
@@ -40,7 +40,7 @@ Template.gameBoard.helpers({
     var users = Meteor.users.find({});
     
     users.forEach(function(user){
-      if(Cheaters.findOne({username: user.username})){
+      if(Cheaters.findOne({}, {username: user.username})){
         return;
       } else {
         Cheaters.insert({username: user.username, score: 0});
@@ -51,12 +51,12 @@ Template.gameBoard.helpers({
 
 // returns a count of all played cards on the board
   cardsPlayed: function(){
-    return GameBoard.find({}).count()
+    return GameBoard.find().count()
   },
 
   cardsLeft: function(){
-    var count = Meteor.users.find().count()
-    return count - GameBoard.find({}).count()
+    var count = Meteor.users.find().count();
+    return count - GameBoard.find({}).count();
   },
 
   roundOver: function(){
@@ -77,10 +77,10 @@ Template.gameBoard.events({
     //  Whenever an in play card gets played, this checks for the corresponding 'cheater' and increases their score by 1
     var playedBy = this.playedBy;
 
-    var cheat = Cheaters.findOne({username: playedBy});
-    var id = cheat._id
+    var cheat = Cheaters.findOne({}, {username: playedBy});
+    var id = cheat._id;
 
     Cheaters.update({_id: id}, {$inc: {score: 1}});
   }
-})
+});
 
