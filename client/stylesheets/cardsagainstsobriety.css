@@ -2,16 +2,17 @@
 .card {
   background-color: black;
   color: white;
-  width: 200px;
-  height: 300px;
+  width: 112.5px;
+  height: 168.75px;
   box-shadow: 10px 10px 5px #888888;
+  display: table-cell;
 }
 
 .white {
   background-color: white;
   color: black;
-  width: 200px;
-  height: 300px;
+  width: 112.5px;
+  height: 168.75px;
   box-shadow: 10px 10px 5px #888888;
 }
 
@@ -19,10 +20,12 @@
   position: relative;
   top: 50%;
   transform: translateY(-50%);
+  display: inline-block;
 }
 
 h3 { 
   text-align: center;
+  display: inline-block;
 }
 
 #login-buttons a {
@@ -48,10 +51,10 @@ h1 {
   float: left;
 }
 
-.answerCards {
+/*.answerCards {
   clear: right;
   float: right;
-}
+}*/
 
 .playerBoard {
   float: left;
@@ -59,4 +62,8 @@ h1 {
 
 .roundCounter {
   float: right;
+}
+
+.playCard {
+  display: inline-block;
 }
