@@ -44,9 +44,19 @@ h1 {
 }
 
 .questionCard {
+  clear: left;
   float: left;
 }
 
 .answerCards {
+  clear: right;
+  float: right;
+}
+
+.playerBoard {
+  float: left;
+}
+
+.roundCounter {
   float: right;
 }

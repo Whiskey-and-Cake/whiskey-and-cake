@@ -1,51 +1,54 @@
 <template name="gameBoard">
-  <h1>Welcome to Cards Against Sobriety <br>Let's get DRUNK!</h1>
+  <h1>Welcome to Cards Against Sobriety <br> Let's get <strong>DRUNK</strong></h1>
 
   <div class="gameBoard container">
     <div class="scoreboard">
     <!-- Display all user scores -->
-      <h3>Scoreboard</h3>
-        <ul>
-          {{#each users}}
-            <li>
-                {{user.username}} - {{user.score}}
-            </li>
-          {{/each}}
-        </ul>
-     
-      <!-- Keep track of round progress -->
-      <h3>Number of cards - </h3>
-        <p class="text">
-        <!-- need a helper function that determines cardsPlayed during each round -->
-          In play: {{round.cardsPlayed}}
-        </p>
-        <p class="text">
-        <!-- need a helper function that determines cardsLeft during each round
-        ie: cardsLeft = (users -1 - cardsPlayed) need to remember to subtract 1 to account for the judge -->
-          Left to be played: {{round.cardsLeft}}
-          <!-- create a listener that checks for when cardsLeft === 0, initiate judge's turn to pick, then end of round. -->
-        </p>
+        <h3>Scoreboard</h3>
+      <div class="playerBoard">
+          <h4>Number of players - {{numPlayers}}</h4>
+          <ul>
+            {{#each playas}}
+              <li>
+                  <strong>{{username}}</strong> - Score: {{score}}
+              </li>
+            {{/each}}
+          </ul>      
+      </div>
+       
+      <div class="roundCounter">
+        <!-- Keep track of round progress -->
+        {{#if roundOver}}
+          <h4>ROUND OVER</h4>
+        {{else}}
+        <h4>Number of cards - </h4>
+          <p class="text">
+          <!-- need a helper function that determines cardsPlayed during each round -->
+            In play: {{cardsPlayed}}
+          </p>
+          <p class="text">
+            Left to be played: {{cardsLeft}}
+          </p>
+          {{/if}}      
+      </div>
     </div>
 
     <div class="questionCard">
     <!-- Display current question card for all players to see -->
-      {{> blackCard}}
+      {{> blackCard}}    
     </div>
 
     <div class="answerCards">
       <ul>
-      <!-- Only display white.card front to the user if they are currently the 'judge' -->
-        {{#each whiteCards.played}}
-          {{#if currentUser.judge}}
-            <li>
-              {{> whiteCard.front}}
-            </li>
-          {{else}}
-            <li>
-              {{> whiteCard.back}}
-            </li>
-          {{/if}}        
+        {{#each whites}}        
+          <li class="playedWhite">{{text}}</li>
+
+          <!-- {{#if judge}} -->
+            <span>UserName - {{playedBy}}</span><br>
+            <button class="pickWinner">Choose</button>
+          <!-- {{/if}} -->
         {{/each}}
+
       </ul>
     </div>
   </div>

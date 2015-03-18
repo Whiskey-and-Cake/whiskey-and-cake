@@ -1,11 +1,15 @@
 <template name="playerHand">
+<h1>Player Hand</h1>
   <div class="playerHand container">
-    <h4>Your Score: {{> currentUser.score}}</h4>
+    <h4>Your Score: {{player.username}}</h4>
+    <h4 class="clearBoard">CLEAR</h4>
+    <h4 class="resetPlayers">RESET</h4>
       <div class="answerCards">
+        <h3>Your Hand</h3>
         <ul>
-          {{#each whiteCards.currentUser}}
-            <li>
-              {{> whiteCard.front}}
+          {{#each playsHand}}
+            <li class="playCard">
+              {{text}}
             </li>
           {{/each}}
         </ul>
