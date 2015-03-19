@@ -18,3 +18,9 @@ if (Meteor.isServer) {
     // code to run on server at startup
   });
 }
+
+Meteor.subscribe('WhiteDeck');
+Meteor.subscribe('BlackDeck');
+Meteor.subscribe('PlayerHand');
+Meteor.subscribe('GameBoard');
+Meteor.subscribe('Scoreboard');

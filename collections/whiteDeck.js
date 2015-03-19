@@ -12,13 +12,6 @@ GameBoard = new Meteor.Collection("GameBoard");
 Scoreboard = new Meteor.Collection("Scoreboard");
 Cheaters = new Meteor.Collection("Cheaters");
 
-Meteor.publish('WhiteDeck', function() { return WhiteDeck.find(); });
-Meteor.publish('BlackDeck', function() { return BlackDeck.find(); });
-Meteor.publish('PlayerHand', function() { return PlayerHand.find(); });
-Meteor.publish('GameBoard', function() { return GameBoard.find(); });
-Meteor.publish('Scoreboard', function() { return Scoreboard.find(); });
-Meteor.publish('Cheaters', function() { return Cheaters.find(); });
-
 Meteor.methods({
   // function deals a player hand at the beginning of the game
   dealHand: function() {
