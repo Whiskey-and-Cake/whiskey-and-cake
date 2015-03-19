@@ -42,5 +42,9 @@ if (WhiteDeck.find().count() === 0) {
   }
 }
 
-
-
+Meteor.publish('WhiteDeck', function() { return WhiteDeck.find(); });
+Meteor.publish('BlackDeck', function() { return BlackDeck.find(); });
+Meteor.publish('PlayerHand', function() { return PlayerHand.find(); });
+Meteor.publish('GameBoard', function() { return GameBoard.find(); });
+Meteor.publish('Scoreboard', function() { return Scoreboard.find(); });
+Meteor.publish('Cheaters', function() { return Cheaters.find(); });
