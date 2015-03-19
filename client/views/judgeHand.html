@@ -1,0 +1,18 @@
+<template name='judgeHand'>
+  <div class='card black'>
+    <div class='card-content'>
+      <h3>
+        {{text}}
+        <span>{{expansion}}</span>
+      </h3>
+    </div>
+  </div>
+  <h4>Populated by GameBoard Collection, for judge's eyes only (not yet though)</h4>
+  <div class='judge'>
+    {{#each playedCards}}
+      <div class='card white'>
+      {{> whiteCard}}
+      </div>
+    {{/each}}
+  </div>
+</template>
