@@ -9,28 +9,37 @@ PlayerHand = new Meteor.Collection("PlayerHand");
 GameBoard = new Meteor.Collection("GameBoard");
 
 
-Scoreboard = new Meteor.Collection("Scoreboard");
-Cheaters = new Meteor.Collection("Cheaters");
+//Scoreboard = new Meteor.Collection("Scoreboard");
+//Cheaters = new Meteor.Collection("Cheaters");
+
+// on meteor start, clear current decks
+WhiteDeck.remove({});
+BlackDeck.remove({});
+PlayerHand.remove({});
+GameBoard.remove({});
 
 Meteor.methods({
   // function deals a player hand at the beginning of the game
   dealHand: function() {
-    for (var i = 0; i < 10; i++) {
-      var _entry = WhiteDeck.findOne({}, {no: 1});
-      var _id = _entry.no;
-      PlayerHand.insert({
-        no: _entry.no,
-        text: _entry.text,
-        expansion: _entry.expansion,
-        owner: Meteor.user().username
-      });
-      WhiteDeck.remove({no: _id});
+    for (var j = 0; j<Meteor.users.find().fetch().length; j++) {
+      var userArray = Meteor.users.find().fetch();
+      for (var i = 0; i < 10; i++) {
+        var _entry = WhiteDeck.findOne({}, {no: 1});
+        var _id = _entry.no;
+        PlayerHand.insert({
+          no: _entry.no,
+          text: _entry.text,
+          expansion: _entry.expansion,
+          owner: userArray[j].username
+        });
+        WhiteDeck.remove({no: _id});
+      }
     }
   },
   // replenishes white cards in the player's hand
   drawWhite: function() {
-    for (var i = 0; i< 10-PlayerHand.find({}, {owner: Meteor.user().username}).count(); i++) {
-      if (PlayerHand.find({}, {owner: Meteor.user().username}).count() < 10) {
+    for (var i = 0; i< PlayerHand.find({}, {owner: Meteor.user().username}).count(); i++) {
+      while (PlayerHand.find({}, {owner: Meteor.user().username}).count() < 10) {
         var _entry = WhiteDeck.findOne({}, {no: 1});
         var _id = _entry.no;
         PlayerHand.insert({
