@@ -48,3 +48,7 @@ Meteor.publish('PlayerHand', function() { return PlayerHand.find(); });
 Meteor.publish('GameBoard', function() { return GameBoard.find(); });
 Meteor.publish('Scoreboard', function() { return Scoreboard.find(); });
 Meteor.publish('Cheaters', function() { return Cheaters.find(); });
+//Testing publishing capabilities 
+Meteor.publish("userData", function () {
+  return Meteor.users.find({});
+});

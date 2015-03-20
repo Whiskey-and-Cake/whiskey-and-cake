@@ -1,16 +1,15 @@
 <template name="gameBoard">
-  <h1>Welcome to Cards Against Sobriety <br> Let's get <strong>DRUNK</strong></h1>
-
+   <h1>Welcome to Cards Against Sobriety <br> Let's get <strong>DRUNK</strong></h1>
   <div class="gameBoard container">
     <div class="scoreboard">
     <!-- Display all user scores -->
-        <h3>Scoreboard</h3>
+         <h3>Scoreboard</h3>
       <div class="playerBoard">
           <h4>Number of players - {{numPlayers}}</h4>
           <ul>
             {{#each playas}}
               <li>
-                  <strong>{{username}}</strong> - Score: {{score}}
+                <strong>{{username}}</strong> - Score: {{score}}
               </li>
             {{/each}}
           </ul>      
