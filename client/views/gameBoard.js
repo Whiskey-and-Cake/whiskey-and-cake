@@ -74,7 +74,7 @@ Template.gameBoard.events({
     Meteor.call('playWhite');
   },
 
-  "click .pickWinner": function(){
+  "click #pickWinner": function(){
     //  Whenever an in play card gets played, this checks for the corresponding 'cheater' and increases their score by 1
     var playedBy = this.playedBy;
 

@@ -99,7 +99,7 @@ Template.playerHand.events({
   //  delete Cheaters
   //},
 
-  "click .clearBoard": function(){
+  "click #clearBoard": function(){
     // clear out white cards
     // redraw blackCard
     // choose new judge
@@ -112,7 +112,7 @@ Template.playerHand.events({
     })
   },
 
-  "click .dealHand": function(){
+  "click #dealHand": function(){
 
     var user = Meteor.user();
     var numHandCards = PlayerHand.find({owner: user.username}).count();
@@ -130,7 +130,7 @@ Template.playerHand.events({
     });
   },
 
-  "click .rotateJudge": function(){
+  "click #rotateJudge": function(){
     // for testing judeg functionality
     // Will ideally be a part of the .clearBoard function above.
     var users = Meteor.users.find();
