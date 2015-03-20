@@ -70,7 +70,8 @@ Template.gameBoard.helpers({
 Template.gameBoard.events({
   "click .playedWhite": function(){
     var id = this._id;
-    GameBoard.remove({_id: id});
+    //GameBoard.remove({_id: id});
+    Meteor.call('playWhite');
   },
 
   "click .pickWinner": function(){
