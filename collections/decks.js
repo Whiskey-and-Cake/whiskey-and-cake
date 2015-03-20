@@ -38,15 +38,15 @@ Meteor.methods({
   },
   // replenishes white cards in the player's hand
   drawWhite: function() {
-    for (var i = 0; i< PlayerHand.find({}, {owner: Meteor.user().username}).count(); i++) {
-      while (PlayerHand.find({}, {owner: Meteor.user().username}).count() < 10) {
+    for (var i = 0; i < PlayerHand.find({owner: Meteor.user()._id}).fetch().length; i++) {
+      while (PlayerHand.find({owner: Meteor.user()._id}).fetch().length < 10) {
         var _entry = WhiteDeck.findOne({}, {no: 1});
         var _id = _entry.no;
         PlayerHand.insert({
           no: _entry.no,
           text: _entry.text,
           expansion: _entry.expansion,
-          owner: Meteor.user().username
+          owner: Meteor.user()._id
         });
         WhiteDeck.remove({no: _id});
       }
