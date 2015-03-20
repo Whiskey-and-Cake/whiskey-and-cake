@@ -44,6 +44,7 @@ if (WhiteDeck.find().count() === 0) {
 
 Accounts.onCreateUser(function(options, user) {
     user.score = 0;
+    user.judge = false;
     return user;
   });
 
