@@ -67,3 +67,28 @@ h1 {
 .playCard {
   display: inline-block;
 }
+
+header {
+    background-color: black;
+}
+
+.btn {
+    position: relative;
+    top: 50%;
+    transform: translateY(25%);
+    border-radius: 0;
+    border: none;
+}
+
+.navbar-brand {
+    color: white;
+    font-family: 'Miss Fajardose', cursive;
+    font-size: 7em;
+    overflow: hidden;
+    text-overflow: clip;
+}
+
+.accounts-dialog label {
+    display: block;
+}
+
