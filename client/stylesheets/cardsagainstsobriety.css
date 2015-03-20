@@ -2,44 +2,52 @@
 .card {
   background-color: black;
   color: white;
-  width: 112.5px;
-  height: 168.75px;
-  box-shadow: 10px 10px 5px #888888;
+  width: 175px;
+  height: 250px;
+  box-shadow: 5px 5px 5px #888888;
   display: table-cell;
 }
 
 .white {
   background-color: white;
   color: black;
-  width: 112.5px;
-  height: 168.75px;
-  box-shadow: 10px 10px 5px #888888;
+  width: 175px;
+  height: 250px;
+  box-shadow: 5px 5px 5px #888888;
 }
 
 .card-content {
+  width: 175px;
+  height: 250px;
   position: relative;
   top: 50%;
   transform: translateY(-50%);
   display: inline-block;
+  padding: 5px 10px;
 }
 
-h3 { 
-  text-align: center;
+.card-text {
+  font-size: 19px;
+  text-align: left;
   display: inline-block;
 }
 
+.expansion {
+  font-size: 13px;
+  text-align: left;
+  display: block;
+  position: absolute;
+  bottom: 0;
+}
+
 #login-buttons a {
-    background-color: black;
-    text-decoration: none;
-    color: white;
+  background-color: black;
+  text-decoration: none;
+  color: white;
 }
 
 .btn-default, .btn-default:hover, .btn-default:active {
-    background-color: black;
-}
-
-h1 { 
-  text-align: center;
+  background-color: black;
 }
 
 .text { 
@@ -48,7 +56,6 @@ h1 {
 
 .questionCard {
   clear: left;
-  float: left;
 }
 
 /*.answerCards {
@@ -69,45 +76,58 @@ h1 {
 }
 
 header {
-    background-color: black;
+  background-color: black;
 }
 
 .btn {
-    position: relative;
-    top: 50%;
-    transform: translateY(25%);
-    border-radius: 0;
-    border: none;
+  position: relative;
+  top: 50%;
+  transform: translateY(25%);
+  border-radius: 0;
+  border: none;
 }
 
 .navbar-brand {
-    color: white;
-    font-family: 'Miss Fajardose', cursive;
-    font-size: 7em;
-    overflow: hidden;
-    text-overflow: clip;
+  color: white;
+  font-family: 'Miss Fajardose', cursive;
+  font-size: 7em;
+  overflow: hidden;
+  text-overflow: clip;
 }
 
 .accounts-dialog label {
-    display: block;
+  display: block;
 }
 
 #login-dropdown-list {
-    background-color: black;
-    color: white;
+  background-color: black;
+  color: white;
 }
 
 #login-buttons .login-button:hover, .accounts-dialog .login-button:hover {
-    background-color: white;
-    color: black;
+  background-color: white;
+  color: black;
 }
 
 #login-buttons .login-button, .accounts-dialog .login-button {
-    background-color: black;
-    color: white;
+  background-color: black;
+  color: white;
 }
 
 .btn-default, .btn-default:hover, .btn-default:active, .btn-default:focus {
-    background-color: black;
+  background-color: black;
 }
 
+#login-username-label, #login-password-label {
+  color: white;
+}
+
+#login-username, #login-password, #login-password-again {
+  color: black;
+}
+
+.bs-docs-container#player {
+  background-color: black;
+  color: white;
+  padding: 30px 0;
+}

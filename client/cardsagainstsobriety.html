@@ -22,20 +22,29 @@
   </header>
 
   <div class="bs-docs-header">
-    <div class="container">Hello,
+    <div class="container">
+      <h1>
+        Welcome to Cards Against Sobriety,
+        <br/>
       {{#if user}}
-        {{user}}
+        Beautiful {{username}},
+        <br/>
+        Let's get <strong>DRUNK</strong>
       {{else}}
-        Stranger
+        Dangerous Stranger, please sign in.
       {{/if}}
+      </h1>
+      {{> gameBoard}}
+    </div>
+  </div>
+
+  <div class="bs-docs-container" id="player">
+    <div class="container">
+      {{> playerHand}}
     </div>
   </div>
 
 
-
-{{> gameBoard}}
-
-{{> playerHand}}
 
 <!-- JOHN TESTING -->
 <br>
