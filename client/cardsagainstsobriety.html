@@ -1,25 +1,50 @@
 <head>
   <title>CAS</title>
+  <link href='http://fonts.googleapis.com/css?family=Miss+Fajardose' rel='stylesheet' type='text/css'>
 </head>
 
-<body>
-  <h1>Cards Against Sobriety</h1>
+<body class="bs-docs-home">
+  <header class="navbar navbar-static-top bs-docs-nav">
+    <div class="container">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">Cards Against Sobriety</a>
+      </div>
+      <nav class="collapse navbar-collapse bs-navbar-collapse">
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <button class="btn btn-default">
+              {{> loginButtons}}
+            </button>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
 
-  <button type="button" class="btn btn-default">
-      {{> loginButtons}}
-  </button>
-
-  <div>Hello,
+  <div class="bs-docs-header">
+    <div class="container">
+      <h1>
+        Welcome to Cards Against Sobriety,
+        <br/>
       {{#if user}}
-        {{user}}
+        Beautiful {{username}},
+        <br/>
+        Let's get <strong>DRUNK</strong>
       {{else}}
-        Stranger
+        Dangerous Stranger, please sign in.
       {{/if}}
+      </h1>
+      {{> gameBoard}}
+    </div>
   </div>
 
-{{> gameBoard}}
+  <div class="bs-docs-container" id="player">
+    <div class="container">
+      {{> playerHand}}
+    </div>
+  </div>
 
-{{> playerHand}}
+
 
 <!-- JOHN TESTING -->
 <br>

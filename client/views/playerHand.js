@@ -116,7 +116,7 @@ Template.playerHand.events({
 
     var user = Meteor.user();
     var numHandCards = PlayerHand.find({owner: user.username}).count();
-    if(numHandCards >= 10){
+    if(numHandCards >= 12){
       console.log('You already have ', numHandCards, ' why not try using them?');
       return;
     }
