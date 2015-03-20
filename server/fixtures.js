@@ -51,7 +51,7 @@ Accounts.onCreateUser(function(options, user) {
 
 Meteor.publish('WhiteDeck', function() { return WhiteDeck.find(); });
 Meteor.publish('BlackDeck', function() { return BlackDeck.find(); });
-Meteor.publish('PlayerHand', function() { return PlayerHand.find(); });
+Meteor.publish('PlayerHand', function() { return PlayerHand.find({owner: this.userId}); });
 Meteor.publish('GameBoard', function() { return GameBoard.find(); });
 //Meteor.publish('Scoreboard', function() { return Scoreboard.find(); });
 //Meteor.publish('Cheaters', function() { return Cheaters.find(); });

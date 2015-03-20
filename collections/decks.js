@@ -30,7 +30,7 @@ Meteor.methods({
           no: _entry.no,
           text: _entry.text,
           expansion: _entry.expansion,
-          owner: userArray[j].username
+          owner: userArray[j]._id
         });
         WhiteDeck.remove({no: _id});
       }
