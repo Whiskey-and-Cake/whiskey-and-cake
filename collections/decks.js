@@ -21,6 +21,13 @@ GameBoard.remove({});
 Meteor.methods({
   // function deals a player hand at the beginning of the game
   dealHand: function() {
+    var rng = Math.round(Math.random() * (Meteor.users.find().fetch().length - 1));
+    console.log(rng, ' random number');
+    var randomUserId = Meteor.users.find().fetch()[rng]._id;
+    console.log(randomUserId, ' random user id')
+    Meteor.users.update({_id: randomUserId}, {$set: {'judge': true}});
+    console.log(Meteor.users.find().fetch()[rng], 'this user is judge');
+    
     for (var j = 0; j<Meteor.users.find().fetch().length; j++) {
       var userArray = Meteor.users.find().fetch();
       for (var i = 0; i < 10; i++) {
