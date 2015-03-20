@@ -5,7 +5,7 @@ if (Meteor.isClient) {
     passwordSignupFields: "USERNAME_ONLY"
   }),
 
-  Meteor.users.update({_id: Meteor.userId()}, { $set: {'profile.score': 0} }),
+  //Meteor.users.update({_id: Meteor.userId()}, { $set: {'profile.score': 0} }),
 
   Template.body.helpers({
     user: function() {
