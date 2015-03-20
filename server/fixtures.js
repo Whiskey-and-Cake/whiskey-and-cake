@@ -42,6 +42,11 @@ if (WhiteDeck.find().count() === 0) {
   }
 }
 
+Accounts.onCreateUser(function(options, user) {
+    user.score = 0;
+    return user;
+  });
+
 /* PUBLISHING */
 
 Meteor.publish('WhiteDeck', function() { return WhiteDeck.find(); });
