@@ -37,16 +37,16 @@ Template.gameBoard.helpers({
     //  the final return statement just provides all the cheaters to the gameboard view as 'playas'
     //  Ideally this the loop through should happen elsewhere and this should just return all the cheaters since I think it's
     //  the loop that causes users to get double added to cheaters.
-    var users = Meteor.users.find({});
+    return Meteor.users.find({});
     
-    users.forEach(function(user){
-      if(Cheaters.findOne({}, {username: user.username})){
-        return;
-      } else {
-        Cheaters.insert({username: user.username, score: 0});
-      }
-    })
-    return Cheaters.find();
+    // users.forEach(function(user){
+    //   if(Cheaters.findOne({}, {username: user.username})){
+    //     return;
+    //   } else {
+    //     Cheaters.insert({username: user.username, score: 0});
+    //   }
+    // })
+    // return Cheaters.find();
   },
 
 // returns a count of all played cards on the board

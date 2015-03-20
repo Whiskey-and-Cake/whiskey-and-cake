@@ -24,3 +24,5 @@ Meteor.subscribe('BlackDeck');
 Meteor.subscribe('PlayerHand');
 Meteor.subscribe('GameBoard');
 Meteor.subscribe('Scoreboard');
+//test
+Meteor.subscribe("userData");
