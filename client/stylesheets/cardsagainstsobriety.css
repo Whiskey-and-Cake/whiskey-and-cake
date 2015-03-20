@@ -29,13 +29,13 @@ h3 {
 }
 
 #login-buttons a {
-    background-color: white;
+    background-color: black;
     text-decoration: none;
-    color: black;
+    color: white;
 }
 
-.btn-default:hover {
-    background-color: white;
+.btn-default, .btn-default:hover, .btn-default:active {
+    background-color: black;
 }
 
 h1 { 
@@ -90,5 +90,24 @@ header {
 
 .accounts-dialog label {
     display: block;
+}
+
+#login-dropdown-list {
+    background-color: black;
+    color: white;
+}
+
+#login-buttons .login-button:hover, .accounts-dialog .login-button:hover {
+    background-color: white;
+    color: black;
+}
+
+#login-buttons .login-button, .accounts-dialog .login-button {
+    background-color: black;
+    color: white;
+}
+
+.btn-default, .btn-default:hover, .btn-default:active, .btn-default:focus {
+    background-color: black;
 }
 
