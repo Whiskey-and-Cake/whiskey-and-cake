@@ -21,14 +21,14 @@ Template.judgeHand.events({
     }),
     //remove cards from GameBoard
     Meteor.call('clearGameBoard', function (err, result) {
-      console.log('clearGameBoard called');
+      //console.log('clearGameBoard called');
       if (err) {
         throw err;
       }
     }),
     //pass 'judgeship' to next person
     Meteor.call('toggleJudge', function (err, result) {
-      console.log('toggleJudge called');
+      //console.log('toggleJudge called');
       if (err) {
         throw err;
       }
@@ -38,7 +38,7 @@ Template.judgeHand.events({
       if(err){
         throw err;
       } else {
-        console.log('Question card drawn');
+        //console.log('Question card drawn');
       }
     })
   }
