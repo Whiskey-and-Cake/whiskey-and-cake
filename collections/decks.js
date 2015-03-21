@@ -84,5 +84,11 @@ Meteor.methods({
       black: true
     });
     BlackDeck.remove({no: _id});
+  },
+  incrementScore: function(cardOwner, tempScore) {
+    //console.log(Meteor.users.findOne({}, {_id: cardOwner}).score, ' tempscore holder');
+    // var tempScore = Meteor.users.findOne({}, {_id: cardOwner}).score;
+    //increment score of card owner
+    Meteor.users.update({_id: cardOwner}, {$set: {'score': ++tempScore}});
   }
 });
