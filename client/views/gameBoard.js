@@ -5,7 +5,6 @@ Template.gameBoard.helpers({
   },
 
   question: function(){
-    console.log("this is the question text: ", GameBoard.find({black: true}, {text: 1}));
     return GameBoard.find({black: true});
   },
   
@@ -44,21 +43,21 @@ Template.gameBoard.events({
     var tempScore = Meteor.users.findOne({}, {_id: cardOwner}).score;
     //calls incrementScore from decks.js
     Meteor.call('incrementScore', cardOwner, tempScore, function(err, id) {
-      console.log('incrementScore called');
+      //console.log('incrementScore called');
       if (err) {
         throw err;
       }
     }),
     //remove cards from GameBoard
     Meteor.call('clearGameBoard', function (err, result) {
-      console.log('clearGameBoard called');
+      //console.log('clearGameBoard called');
       if (err) {
         throw err;
       }
     }),
     //pass 'judgeship' to next person
     Meteor.call('toggleJudge', function (err, result) {
-      console.log('toggleJudge called');
+      //console.log('toggleJudge called');
       if (err) {
         throw err;
       }

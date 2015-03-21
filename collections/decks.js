@@ -85,16 +85,16 @@ Meteor.methods({
   toggleJudge: function() {
     console.log('toggleJudge being called');
     for (var i = 0; i < Meteor.users.find().fetch().length; i++) {
-      console.log(i, 'at i position');
+      //console.log(i, 'at i position');
       if (Meteor.users.find().fetch()[i].judge === true) {
-        console.log('current judge found!');
+        //console.log('current judge found!');
         Meteor.users.update({_id: Meteor.user()._id}, {$set: {'judge': false}});
         if (i === (Meteor.users.find().fetch().length - 1)) {
-          console.log('current judge last in array, updating first to be judge');
+          //console.log('current judge last in array, updating first to be judge');
           Meteor.users.update({_id: Meteor.users.find().fetch()[0]._id}, {$set: {'judge': true}});
           return;
         } else {
-          console.log('updating next user to be judge!');
+          //console.log('updating next user to be judge!');
           Meteor.users.update({_id: Meteor.users.find().fetch()[++i]._id}, {$set: {'judge': true}});
           return;
         }

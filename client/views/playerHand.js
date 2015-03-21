@@ -21,8 +21,6 @@ Template.playerHand.events({
       return;
     }
     
-    console.log(user, ' is the user');
-    console.log(GameBoard.find({owner: user._id}).fetch().length, ' is the GameBoard');
 
     if(GameBoard.find({owner: user._id}).fetch().length > 0){
       console.log("Yo, you've already played a card!");
@@ -30,7 +28,7 @@ Template.playerHand.events({
     }
 
     Meteor.call('playCard', this, function(err, id) {
-      console.log('card being played');
+      //console.log('card being played');
       if (err) {
         throw err;
       }
@@ -52,7 +50,7 @@ Template.playerHand.events({
       if(err){
         throw err;
       } else {
-        console.log('Board Cleared');
+        //console.log('Board Cleared');
       }
     })
   },
@@ -62,22 +60,22 @@ Template.playerHand.events({
     var user = Meteor.user();
     var numHandCards = PlayerHand.find({owner: user._id}).count();
     if(numHandCards >= 10){
-      console.log('You already have ', numHandCards, ' why not try using them?');
+      //console.log('You already have ', numHandCards, ' why not try using them?');
       return;
     }
     Meteor.call("dealHand", function(err, res){
       if(err){
         throw err;
       } else {
-        console.log('Hand Dealt');
-        console.log('Result object - ', res);
+        //console.log('Hand Dealt');
+        //console.log('Result object - ', res);
       }
     });
     Meteor.call("drawBlack", function(err, res){
       if(err){
         throw err;
       } else {
-        console.log('Board Cleared');
+        //console.log('Board Cleared');
       }
     })
   }
