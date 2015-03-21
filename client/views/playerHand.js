@@ -74,7 +74,7 @@ Template.playerHand.events({
       if(err){
         throw err;
       } else {
-        console.log('Board Cleared')
+        console.log('Board Cleared');
       }
     })
   },

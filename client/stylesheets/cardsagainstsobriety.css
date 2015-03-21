@@ -1,106 +1,11 @@
 /* CSS declarations go here */
-.card {
-  background-color: black;
-  color: white;
-  width: 125px;
-  height: 185px;
-  border-radius: 3px;
-  display: table-cell;
+
+.container {
+  width: 1350px;
 }
 
-.white, .answerCards {
-  background-color: white;
-  color: black;
-  width: 125px;
-  height: 185px;
-  border: 1px solid black;
-  border-radius: 3px;
-}
 
-.card-content {
-  width: 125px;
-  height: 185px;
-  position: relative;
-  border-radius: 3px;
-  top: 50%;
-  transform: translateY(-50%);
-  display: inline-block;
-  padding: 5px;
-}
-
-.card-text {
-  font-size: 12px;
-  text-align: left;
-  display: inline-block;
-}
-
-.expansion {
-  font-size: 3px;
-  text-align: left;
-  display: block;
-  position: absolute;
-  bottom: 0;
-}
-
-#login-buttons a,
-.playerButton {
-  background-color: black;
-  text-decoration: none;
-  color: white;
-}
-
-.playerButton {
-  border: 1px solid white;
-  width: 5em;
-}
-
-.pickWinner {
-  border: 1px solid black;
-  background-color: white;
-}
-
-.btn-default, .btn-default:hover, .btn-default:active {
-  background-color: black;
-}
-
-.text { 
-  text-align: center;
-}
-
-.questionCard {
-  clear: left;
-  display: inline-block;
-}
-
-/*.answerCards {
-  clear: right;
-  float: right;
-}*/
-
-.playerBoard {
-  float: left;
-}
-
-.roundCounter {
-  float: right;
-}
-
-.playCard {
-  display: inline-block;
-}
-
-header {
-  background-color: black;
-}
-
-.btn {
-  position: relative;
-  top: 50%;
-  transform: translateY(25%);
-  border-radius: 0;
-  border: none;
-}
-
+/****** Navbar Group ******/
 .navbar {
   margin-bottom: 0;
 }
@@ -111,6 +16,29 @@ header {
   font-size: 7em;
   overflow: hidden;
   text-overflow: clip;
+}
+
+header {
+  background-color: black;
+}
+
+#login-buttons a,
+.playerButton {
+  background-color: black;
+  text-decoration: none;
+  color: white;
+}
+
+.btn-default, .btn-default:hover, .btn-default:active {
+  background-color: black;
+}
+
+.btn {
+  position: relative;
+  top: 50%;
+  transform: translateY(25%);
+  border-radius: 0;
+  border: none;
 }
 
 .accounts-dialog label {
@@ -144,18 +72,113 @@ header {
   color: black;
 }
 
+#login-dropdown-list {
+  left: -50px;
+}
+
+/*** End of Navbar Group ***/
+
+
+/******* Card Group ********/
+.card {
+  background-color: black;
+  color: white;
+  width: 125px;
+  height: 185px;
+  border-radius: 3px;
+  display: table-cell;
+}
+
+.white {
+  background-color: white;
+  color: black;
+  width: 125px;
+  height: 185px;
+  border: 1px solid black;
+  border-radius: 3px;
+}
+
+.card-content {
+  width: 125px;
+  height: 185px;
+  position: relative;
+  border-radius: 3px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: inline-block;
+  padding: 5px;
+}
+
+.card-text {
+  font-size: 12px;
+  text-align: left;
+  display: inline-block;
+}
+
+.expansion {
+  font-size: 7px;
+  text-align: left;
+  display: block;
+  position: absolute;
+  bottom: 0;
+}
+/**** End of Card Group ****/
+
+
+/***** Gameboard Group *****/
+.bs-docs-header {
+  margin-bottom: 25px;
+}
+
+.answerCards {
+  background-color: white;
+  color: black;
+  width: 125px;
+  height: 185px;
+  border-radius: 3px;
+  display: inline-block;
+  margin-right: 2px;
+}
+
+.pickWinner {
+  border: 1px solid black;
+  background-color: white;
+}
+
+.questionCard {
+  clear: left;
+  display: inline-block;
+}
+
+.playerBoard {
+  float: left;
+}
+
+.roundCounter {
+  float: right;
+}
+/* End of Gameboard Group **/
+
+
+/**** Playerhand Group *****/
 .bs-docs-container#player {
   background-color: black;
   color: white;
   padding-bottom: 30px;
 }
 
-.bs-docs-header {
-  margin-bottom: 25px;
+.playerButton {
+  border: 1px solid white;
+  width: 5em;
 }
 
-.container {
-  width: 1350px;
+.text {
+  text-align: center;
 }
+
+.playCard {
+  display: inline-block;
+}
+/* End of Playerhand Group */
 
 

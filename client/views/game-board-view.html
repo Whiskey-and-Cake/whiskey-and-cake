@@ -54,19 +54,19 @@
       </div>
 
       <div class="col-md-10 answerCardsContainer">
-        <div class="answerCards">
-      <!-- Display all currently played answer cards -->
-          <ul>
-            {{#each answers}}
-              <li class="playedWhite">{{text}}</li>
+        <!--<div class="answerCards">-->
+        <!-- Display all currently played answer cards -->
+          {{#each answers}}
+            <div class="answerCards">
+              {{> whiteCard}}
+            </div>
 
             <!-- {{#if judge}} -->
-              <span>UserName - {{playedBy}}</span><br>
-              <button class="pickWinner">CHOOSE</button>
+              <!--<span>UserName - {{playedBy}}</span><br>-->
+              <!--<button class="pickWinner">CHOOSE</button>-->
             <!-- {{/if}} -->
-            {{/each}}
-          </ul>
-        </div>
+          {{/each}}
+        <!--</div>-->
       </div>
     </div>
       

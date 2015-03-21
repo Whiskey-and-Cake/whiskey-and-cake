@@ -13,12 +13,13 @@ Template.gameBoard.helpers({
   },
 
   question: function(){
-    return GameBoard.find({}, {black: true});
+    console.log("this is the question text: ", GameBoard.find({}, {black: true}))
+    return GameBoard.find({black: true});
   },
   
   answers: function(){
     // return BoardWhites.find({});
-    return GameBoard.find({}, {black: false});
+    return GameBoard.find({black: false});
   },
 
   judge: function(){
