@@ -45,6 +45,10 @@
       <h3>You're the Motha Fuckin' JUDGE</h3>
     {{/if}}
 
+    {{#if winnerChosen}}
+      <h3>So somebody finds this sick shit funny..</h3>
+    {{/if}}
+
     <div class="row cardsInPlay">
     <!-- Contains all cards currently in play -->
       <div class="col-md-2 questionCardContainer">
@@ -57,7 +61,6 @@
       </div>
 
       <div class="col-md-10 answerCardsContainer">
-        <!--<div class="answerCards">-->
         <!-- Display all currently played answer cards -->
           {{#each answers}}
             <div class="answerCards">
