@@ -26,28 +26,66 @@ Template.gameBoard.helpers({
     return (count - 1) - GameBoard.find({black: false}).count();
   },
 
-  roundOver: function(){
+  allCardsPlayed: function(){
     var players = (Meteor.users.find().count() - 1);
     var played = GameBoard.find({black: false}).count();
     return players - played === 0;
+  },
+
+  winnerChosen: function(){
+    var round = RoundInfo.findOne({});
+    return round.roundOver;
   }
 
 });
 
+
 Template.gameBoard.events({
   "click .answerCards": function (event) {
     event.stopPropagation();
-    //store click context to pass into method call
+
+    // calls endRound from deck.js, which sets roundOver to true for the winnerChosen helper above
+    Meteor.call('endRound', function(err, res){
+      if(err){
+        throw err;
+      }
+    });
+
+    // store click context to pass into method call
     var cardOwner = this.owner;
     //store current score to pass into method call
-    var tempScore = Meteor.users.findOne({}, {_id: cardOwner}).score;
-    //calls incrementScore from decks.js
-    Meteor.call('incrementScore', cardOwner, tempScore, function(err, id) {
-      //console.log('incrementScore called');
+    // calls incrementScore from decks.js
+    Meteor.call('incrementScore', cardOwner, function(err, id) {
+      console.log('incrementScore called');
       if (err) {
         throw err;
       }
-    }),
+    });
+
+    // stores the winning card
+    var answer = GameBoard.findOne({owner: cardOwner});
+    // stores the question card
+    var question = GameBoard.findOne({black: true});
+    // calls clearLosers form decks.js, which clears the GameBoard and inserts 
+    // the winning card along with the card it answered
+    Meteor.call("clearLosers", answer, question, function(err, result){
+      if(err) {
+        throw err;
+      }
+    });
+
+  },
+
+  "click #nextRound": function(event){
+    event.stopPropagation();
+
+    // calls newRound which removes round data
+    Meteor.call('newRound', function(err, result){
+      if(err) {
+        throw err;
+      }
+    })
+
     //remove cards from GameBoard
     Meteor.call('clearGameBoard', function (err, result) {
       //console.log('clearGameBoard called');
@@ -71,4 +109,8 @@ Template.gameBoard.events({
       }
     })
   }
+
 });
+
+
+

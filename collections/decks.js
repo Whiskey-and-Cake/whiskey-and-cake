@@ -8,6 +8,9 @@ PlayerHand = new Meteor.Collection("PlayerHand");
 // collection of all cards on the game table
 GameBoard = new Meteor.Collection("GameBoard");
 
+// collection of that round's question and the winning answer
+RoundInfo = new Meteor.Collection("RoundInfo");
+
 Meteor.methods({
   newGame: function() {
     Meteor.users.remove({});
@@ -33,6 +36,7 @@ Meteor.methods({
       }
     }
   },
+
   // replenishes white cards in the player's hand
   drawWhite: function() {
     for (var i = 0; i < PlayerHand.find({owner: Meteor.user()._id}).fetch().length; i++) {
@@ -49,6 +53,7 @@ Meteor.methods({
       }
     }
   },
+
   // adds card to game board with the user id and removes from playerhand
   // added username
   playCard: function(card) {
@@ -61,6 +66,7 @@ Meteor.methods({
       owner: card.owner
     });
   },
+
   // this function starts a new hand by clearing the GameBoard and adding a black card
   drawBlack: function() {
     GameBoard.remove({});
@@ -75,13 +81,45 @@ Meteor.methods({
     });
     BlackDeck.remove({no: _id});
   },
+
   //increment score of card owner
-  incrementScore: function(cardOwner, tempScore) {
-    Meteor.users.update({_id: cardOwner}, {$set: {'score': ++tempScore}});
+  incrementScore: function(cardOwner) {
+    Meteor.users.update({_id: cardOwner}, {$inc: {'score': 1}});
   },
+
+  // used for checking if the round is over
+  endRound: function(){
+    RoundInfo.insert({roundOver: true})
+  },
+
+  // resets the round
+  newRound: function(){
+    RoundInfo.remove({});
+  },
+
+  // Clear losing cards from the gameboard by clearing the entire board
+  // and then inserting the winning answer and corresponding question
+  clearLosers: function(winnerCard, questionCard){
+
+    GameBoard.remove({});
+
+    GameBoard.insert({
+      text: winnerCard.text,
+      expansion: winnerCard.expansion,
+      black: false
+    });
+    GameBoard.insert({
+      text: questionCard.text,
+      expansion: questionCard.expansion,
+      black: true
+    });
+
+  },
+
   clearGameBoard: function() {
     GameBoard.remove({});
   },
+
   toggleJudge: function() {
     console.log('toggleJudge being called');
     for (var i = 0; i < Meteor.users.find().fetch().length; i++) {

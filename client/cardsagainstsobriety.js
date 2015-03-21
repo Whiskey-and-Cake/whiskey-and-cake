@@ -9,3 +9,4 @@ Meteor.subscribe('BlackDeck');
 Meteor.subscribe('PlayerHand');
 Meteor.subscribe('GameBoard');
 Meteor.subscribe("userData");
+Meteor.subscribe("RoundInfo");

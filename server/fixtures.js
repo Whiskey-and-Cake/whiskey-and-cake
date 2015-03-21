@@ -8,7 +8,11 @@ WhiteDeck.remove({});
 BlackDeck.remove({});
 PlayerHand.remove({});
 GameBoard.remove({});
+<<<<<<< HEAD
 Meteor.users.remove({});
+=======
+RoundInfo.remove({});
+>>>>>>> (feat) Added a feature that presents the winning card along with its corresponding question
 
 // in-place shuffle algorithm for CardsMaster
 for (var i=0; i<CardsMaster.length; i++) {
@@ -57,8 +61,10 @@ Accounts.onCreateUser(function(options, user) {
 
 /* PUBLISHING */
 
-Meteor.publish('WhiteDeck', function() { return WhiteDeck.find(); });
-Meteor.publish('BlackDeck', function() { return BlackDeck.find(); });
-Meteor.publish('PlayerHand', function() { return PlayerHand.find({owner: this.userId}); });
-Meteor.publish('GameBoard', function() { return GameBoard.find(); });
+Meteor.publish("WhiteDeck", function() { return WhiteDeck.find(); });
+Meteor.publish("BlackDeck", function() { return BlackDeck.find(); });
+Meteor.publish("PlayerHand", function() { return PlayerHand.find({owner: this.userId}); });
+Meteor.publish("GameBoard", function() { return GameBoard.find(); });
 Meteor.publish("userData", function () { return Meteor.users.find() });
+Meteor.publish("RoundInfo", function () { return RoundInfo.find() });
+
