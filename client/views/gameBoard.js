@@ -1,7 +1,7 @@
 Template.gameBoard.helpers({
 
   users: function(){
-    return Meteor.users.find({});
+    return Meteor.users.find({'status.online': true});
   },
 
   question: function(){
@@ -13,7 +13,11 @@ Template.gameBoard.helpers({
   },
 
   numPlayers: function(){
-    return Meteor.users.find().count()
+    if (Meteor.users.find({'status.online': true}).count() === 0) {
+      return 0;
+    } else {
+      return Meteor.users.find({'status.online': true}).count();   
+    }
   },
 
   // returns a count of all played cards on the board
