@@ -8,6 +8,7 @@ WhiteDeck.remove({});
 BlackDeck.remove({});
 PlayerHand.remove({});
 GameBoard.remove({});
+Meteor.users.remove({});
 
 // in-place shuffle algorithm for CardsMaster
 for (var i=0; i<CardsMaster.length; i++) {
