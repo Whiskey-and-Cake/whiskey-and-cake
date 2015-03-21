@@ -1,13 +1,14 @@
-if (Meteor.isServer) {
-  Meteor.startup(function () {
+//if (Meteor.isServer) {
+//  Meteor.startup(function () {
     // on meteor start, clear current decks
     WhiteDeck.remove({});
     BlackDeck.remove({});
     PlayerHand.remove({});
     GameBoard.remove({});
-  });
-}
+//  });
+//}
 
+//Cmd line if meteor running on port 3000 already.
 //Cmd line if meteor running on port 3000 already.
 //kill -9 `ps ax | grep node | grep meteor | awk '{print $1}'`
 
