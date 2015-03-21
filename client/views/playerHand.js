@@ -16,6 +16,11 @@ Template.playerHand.events({
 
   "click .playCard": function(){
     var user = Meteor.user();
+    if (user.judge) {
+      console.log('YOU DA JUDGE BRO, NO PLAYING CARDS');
+      return;
+    }
+    
     console.log(user, ' is the user');
     console.log(GameBoard.find({owner: user._id}).fetch().length, ' is the GameBoard');
 

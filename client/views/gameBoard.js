@@ -24,11 +24,11 @@ Template.gameBoard.helpers({
 
   cardsLeft: function(){
     var count = Meteor.users.find().count();
-    return count - GameBoard.find({black: false}).count();
+    return (count - 1) - GameBoard.find({black: false}).count();
   },
 
   roundOver: function(){
-    var players = Meteor.users.find().count();
+    var players = (Meteor.users.find().count() - 1);
     var played = GameBoard.find({black: false}).count();
     return players - played === 0;
   }
