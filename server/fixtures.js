@@ -60,4 +60,4 @@ Meteor.publish('WhiteDeck', function() { return WhiteDeck.find(); });
 Meteor.publish('BlackDeck', function() { return BlackDeck.find(); });
 Meteor.publish('PlayerHand', function() { return PlayerHand.find({owner: this.userId}); });
 Meteor.publish('GameBoard', function() { return GameBoard.find(); });
-Meteor.publish("userData", function () { if (this.userId) { return Meteor.users.find({_id: this.userId}) }});
+Meteor.publish("userData", function () { return Meteor.users.find() });
