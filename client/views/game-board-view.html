@@ -5,7 +5,7 @@
       <div class="playerBoard">
           <h4>Currently there are {{numPlayers}} players in the room.</h4>
           <ul>
-            {{#each playas}}
+            {{#each users}}
               <li>
                 <strong>{{username}}</strong> - Score: {{score}}
               </li>
@@ -38,7 +38,7 @@
       </div>
     </div>
 
-    {{#if judge}}
+    {{#if currentUser.judge}}
       <h3>You're the Motha Fuckin' JUDGE</h3>
     {{/if}}
 
