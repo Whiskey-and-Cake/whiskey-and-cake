@@ -8,11 +8,8 @@ WhiteDeck.remove({});
 BlackDeck.remove({});
 PlayerHand.remove({});
 GameBoard.remove({});
-<<<<<<< HEAD
 Meteor.users.remove({});
-=======
 RoundInfo.remove({});
->>>>>>> (feat) Added a feature that presents the winning card along with its corresponding question
 
 // in-place shuffle algorithm for CardsMaster
 for (var i=0; i<CardsMaster.length; i++) {
