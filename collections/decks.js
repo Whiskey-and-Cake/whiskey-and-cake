@@ -1,6 +1,6 @@
 // shuffled decks
 WhiteDeck = new Meteor.Collection("WhiteDeck");
-BlackDeck = new Meteor.Collection('BlackDeck');
+BlackDeck = new Meteor.Collection("BlackDeck");
 
 // collection with all user hands
 PlayerHand = new Meteor.Collection("PlayerHand");
