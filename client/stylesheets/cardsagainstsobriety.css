@@ -2,38 +2,40 @@
 .card {
   background-color: black;
   color: white;
-  width: 175px;
-  height: 250px;
-  box-shadow: 5px 5px 5px #888888;
+  width: 125px;
+  height: 185px;
+  border-radius: 3px;
   display: table-cell;
 }
 
-.white {
+.white, .answerCards {
   background-color: white;
   color: black;
-  width: 175px;
-  height: 250px;
-  box-shadow: 5px 5px 5px #888888;
+  width: 125px;
+  height: 185px;
+  border: 1px solid black;
+  border-radius: 3px;
 }
 
 .card-content {
-  width: 175px;
-  height: 250px;
+  width: 125px;
+  height: 185px;
   position: relative;
+  border-radius: 3px;
   top: 50%;
   transform: translateY(-50%);
   display: inline-block;
-  padding: 5px 10px;
+  padding: 5px;
 }
 
 .card-text {
-  font-size: 19px;
+  font-size: 12px;
   text-align: left;
   display: inline-block;
 }
 
 .expansion {
-  font-size: 13px;
+  font-size: 3px;
   text-align: left;
   display: block;
   position: absolute;
@@ -67,6 +69,7 @@
 
 .questionCard {
   clear: left;
+  display: inline-block;
 }
 
 /*.answerCards {
@@ -96,6 +99,10 @@ header {
   transform: translateY(25%);
   border-radius: 0;
   border: none;
+}
+
+.navbar {
+  margin-bottom: 0;
 }
 
 .navbar-brand {
@@ -140,6 +147,15 @@ header {
 .bs-docs-container#player {
   background-color: black;
   color: white;
-  padding: 30px 0;
+  padding-bottom: 30px;
 }
+
+.bs-docs-header {
+  margin-bottom: 25px;
+}
+
+.container {
+  width: 1350px;
+}
+
 
