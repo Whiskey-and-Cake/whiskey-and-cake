@@ -25,7 +25,7 @@
     <div class="container">
       <h1>
         Welcome to Cards Against Sobriety,
-      {{#if user}}
+      {{#if currentUser}}
         Beautiful {{currentUser.username}}.
         <br/>
         Let's get <strong>DRUNK</strong>
@@ -42,14 +42,3 @@
       {{> playerHand}}
     </div>
   </div>
-
-
-
-<!-- JOHN TESTING -->
-<br>
-{{#if currentUser.judge}}
-<h3>JOHN TESTING AREA</h3>
-{{> judgeHand}}
-{{/if}}
-<!-- JOHN TESTING -->
-</body>

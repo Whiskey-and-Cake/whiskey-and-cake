@@ -68,6 +68,13 @@ Template.playerHand.events({
         console.log('Result object - ', res);
       }
     });
+    Meteor.call("drawBlack", function(err, res){
+      if(err){
+        throw err;
+      } else {
+        console.log('Board Cleared');
+      }
+    })
   }
 
 });

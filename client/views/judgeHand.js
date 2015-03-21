@@ -32,6 +32,14 @@ Template.judgeHand.events({
       if (err) {
         throw err;
       }
+    }),
+    //draw new black card
+    Meteor.call("drawBlack", function(err, res){
+      if(err){
+        throw err;
+      } else {
+        console.log('Question card drawn');
+      }
     })
   }
 });
