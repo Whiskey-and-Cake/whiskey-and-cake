@@ -4,7 +4,6 @@
   width: 1350px;
 }
 
-
 /****** Navbar Group ******/
 .navbar {
   margin-bottom: 0;
@@ -110,6 +109,8 @@ header {
 }
 
 .card-text {
+  font-family: Tahoma, Geneva, sans-serif;
+  font-weight: 700;
   font-size: 12px;
   text-align: left;
   display: inline-block;
