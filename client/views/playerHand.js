@@ -1,6 +1,5 @@
 
 Template.playerHand.helpers({
-    // userId: userId,
   player: function(){
     return Meteor.user()
   },  
@@ -8,7 +7,7 @@ Template.playerHand.helpers({
   playsHand: function(){
     var user = Meteor.user();
     // displays hand to user, filtered by username.
-    return PlayerHand.find({}, {owner: user._id}) //Meteor.user()._id
+    return PlayerHand.find({}, {owner: user._id})
   }
 
 });
@@ -32,39 +31,13 @@ Template.playerHand.events({
       }
     });
 
-    // problem with 'drawWhite'
-    Meteor.call('drawWhite', function(err, res){
+    Meteor.call('drawWhite', function(err, id){
       if(err){
         throw err;
       }
     });
 
-    //var cardToPlay = { cardType: this.cardType, text: this.text, expansion: this.expansion, playedBy: user.username }
-    //
-    //var id = this._id
-    //
-    //PlayerHand.remove({_id: id});
-    //GameBoard.insert({cardType: cardToPlay.cardType, text: cardToPlay.text, expansion: cardToPlay.expansion, black: false, playedBy: cardToPlay.playedBy});
   },
-
-  // "click .playCard": function(){
-  //   Meteor.call("playCard", function(err, res){
-  //     if(err){
-  //       throw err;
-  //     } else {
-  //       console.log('card played');
-  //       console.log('Result object - ', res);
-  //     }
-  //   })
-  // },
-
-  // Doesn't work.
-  //"click .resetPlayers": function(){
-  //  // delete all records from cheaters
-  //  console.log('Resetting players')
-  //  // Cheaters.drop();
-  //  delete Cheaters
-  //},
 
   "click #clearBoard": function(){
     // clear out white cards
@@ -95,26 +68,6 @@ Template.playerHand.events({
         console.log('Result object - ', res);
       }
     });
-  },
-
-  "click #rotateJudge": function(){
-    // for testing judeg functionality
-    // Will ideally be a part of the .clearBoard function above.
-    var users = Meteor.users.find();
-    possJudges = [];
-
-    users.forEach(function(user){
-      possJudges.push(user.username);
-    });
-    console.log('possJudges... ', possJudges);
-    if(judgeIndex === possJudges.length){
-      judgeIndex = 0;
-    }
-    console.log('old judgename - ', judgename);
-    judgename = possJudges[judgeIndex];
-    judgeIndex ++;
-    console.log('new judgename - ', judgename);
-
   }
 
 });

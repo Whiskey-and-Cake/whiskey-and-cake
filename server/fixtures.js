@@ -1,18 +1,13 @@
-//if (Meteor.isServer) {
-//  Meteor.startup(function () {
-    // on meteor start, clear current decks
-    WhiteDeck.remove({});
-    BlackDeck.remove({});
-    PlayerHand.remove({});
-    GameBoard.remove({});
-//  });
-//}
-
-//Cmd line if meteor running on port 3000 already.
 //Cmd line if meteor running on port 3000 already.
 //kill -9 `ps ax | grep node | grep meteor | awk '{print $1}'`
 
 /* DECK INSTANTIATION */
+
+// on meteor start, clear current decks
+WhiteDeck.remove({});
+BlackDeck.remove({});
+PlayerHand.remove({});
+GameBoard.remove({});
 
 // in-place shuffle algorithm for CardsMaster
 for (var i=0; i<CardsMaster.length; i++) {
