@@ -1,5 +1,3 @@
-// Leaderboard = {};
-// Leaderboard = [];
 
 possJudges = [];
 judgeIndex = 0;
@@ -13,19 +11,20 @@ Template.gameBoard.helpers({
   },
 
   question: function(){
-    console.log("this is the question text: ", GameBoard.find({}, {black: true}))
+    console.log("this is the question text: ", GameBoard.find({}, {black: true}));
     return GameBoard.find({black: true});
   },
   
   answers: function(){
-    // return BoardWhites.find({});
     return GameBoard.find({black: false});
   },
 
   judge: function(){
-    var user = Meteor.user();
-    var username = user.username;
-    return username === judgename;
+    if (Meteor.users()) {
+      return Meteor.user().username === judgename;
+    } else {
+      console.log('gameboard.js line 26 No users found');
+    }
   },
 
   numPlayers: function(){
@@ -66,23 +65,21 @@ Template.gameBoard.helpers({
     return players - played === 0;
   }
 
-})
+});
 
 Template.gameBoard.events({
   "click .playedWhite": function(){
-    var id = this._id;
-    //GameBoard.remove({_id: id});
-    Meteor.call('playWhite');
+    Meteor.call('playCard');
   },
 
   "click #pickWinner": function(){
     //  Whenever an in play card gets played, this checks for the corresponding 'cheater' and increases their score by 1
-    var playedBy = this.playedBy;
+    //var playedBy = this.playedBy;
 
-    var cheat = Cheaters.findOne({}, {username: playedBy});
-    var id = cheat._id;
+    //var cheat = Cheaters.findOne({}, {username: playedBy});
+    //var id = cheat._id;
 
-    Cheaters.update({_id: id}, {$inc: {score: 1}});
+    //Cheaters.update({_id: id}, {$inc: {score: 1}});
   }
 });
 

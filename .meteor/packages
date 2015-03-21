@@ -10,3 +10,5 @@ accounts-ui
 accounts-password
 twbs:bootstrap
 alanning:roles
+sanjo:jasmine
+velocity:html-reporter
