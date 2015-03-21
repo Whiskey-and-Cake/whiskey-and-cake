@@ -9,6 +9,9 @@ PlayerHand = new Meteor.Collection("PlayerHand");
 GameBoard = new Meteor.Collection("GameBoard");
 
 Meteor.methods({
+  newGame: function() {
+    Meteor.users.remove({});
+  },
   // function deals a player hand at the beginning of the game
   dealHand: function() {
     var rng = Math.round(Math.random() * (Meteor.users.find().fetch().length - 1));
