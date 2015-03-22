@@ -14,7 +14,7 @@ Template.gameBoard.helpers({
 
   numPlayers: function(){
     if (Meteor.users.find({'status.online': true}).count() === 0) {
-      return 0;
+      return 'NO';
     } else {
       return Meteor.users.find({'status.online': true}).count();   
     }
@@ -26,8 +26,8 @@ Template.gameBoard.helpers({
   },
 
   cardsLeft: function(){
-    var count = Meteor.users.find().count();
-    return (count - 1) - GameBoard.find({black: false}).count();
+    var count = Meteor.users.find({'status.online': true}).count();
+    return Math.max(0, (count - 1) - GameBoard.find({black: false}).count());
   },
 
   allCardsPlayed: function(){
