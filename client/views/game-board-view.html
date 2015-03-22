@@ -15,21 +15,23 @@
        
       <div class="roundCounter">
         <!-- Keep track of round progress -->
-        {{#if allCardsPlayed}}
-          <h3>ROUND OVER</h3>
-          {{#if winnerChosen}}
-            <button id="nextRound">Let's play another, you smarmy wench</button>
-          {{/if}}
-        {{else}}
-          <h4>Number of cards - </h4>
-          <p class="text">
-          <!-- need a helper function that determines cardsPlayed during each round -->
-            In play: {{cardsPlayed}}
-          </p>
-          <p class="text">
-            Left to be played: {{cardsLeft}}
-          </p>
-          {{/if}}      
+        {{#if winnerChosen}}
+          <button id="nextRound">Let's play another, you smarmy wench</button>
+        {{else}}      
+          {{#if allCardsPlayed}}
+            <h3>ROUND OVER</h3>
+          {{else}}
+            <h4>Number of cards - </h4>
+            <p class="text">
+            <!-- need a helper function that determines cardsPlayed during each round -->
+              In play: {{cardsPlayed}}
+            </p>
+            <p class="text">
+              Left to be played: {{cardsLeft}}
+            </p>
+          {{/if}}  
+       
+        {{/if}}
       </div>
     </div>
 

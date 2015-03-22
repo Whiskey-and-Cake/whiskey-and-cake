@@ -91,12 +91,16 @@ Meteor.methods({
 
   // used for checking if the round is over
   endRound: function(){
+    // var round = RoundInfo.findOne({});
+    // RoundInfo.update({_id: round._id}, {$set: {roundOver: true}});
     RoundInfo.insert({roundOver: true})
   },
 
   // resets the round
   newRound: function(){
     RoundInfo.remove({});
+    // var round = RoundInfo.findOne({});
+    // RoundInfo.update({_id: round._id}, {$set: {roundOver: false}});
   },
 
   // Clear losing cards from the gameboard by clearing the entire board
