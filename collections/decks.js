@@ -22,24 +22,26 @@ Meteor.methods({
     Meteor.users.update({_id: randomUserId}, {$set: {'judge': true}});
     
     for (var j = 0; j<Meteor.users.find().fetch().length; j++) {
-      var userArray = Meteor.users.find().fetch();
-      for (var i = 0; i < 10; i++) {
-        var _entry = WhiteDeck.findOne({}, {no: 1});
-        var _id = _entry.no;
-        PlayerHand.insert({
-          no: _entry.no,
-          text: _entry.text,
-          expansion: _entry.expansion,
-          owner: userArray[j]._id
-        });
-        WhiteDeck.remove({no: _id});
+      if (!PlayerHand.find({owner: Meteor.user()._id}).fetch()) {
+        var userArray = Meteor.users.find().fetch();
+        for (var i = 0; i < 10; i++) {
+          var _entry = WhiteDeck.findOne({}, {no: 1});
+          var _id = _entry.no;
+          PlayerHand.insert({
+            no: _entry.no,
+            text: _entry.text,
+            expansion: _entry.expansion,
+            owner: userArray[j]._id
+          });
+          WhiteDeck.remove({no: _id});
+        }
       }
     }
   },
 
   // replenishes white cards in the player's hand
   drawWhite: function() {
-    for (var i = 0; i < Meteor.users().find().fetch().length; i++) { // formerly: i< PlayerHand.find({owner: Meteor.user()._id}).fetch().length
+    for (var i = 0; i < PlayerHand.find({owner: Meteor.user()._id}).fetch().length; i++) {
       while (PlayerHand.find({owner: Meteor.user()._id}).fetch().length < 10) {
         var _entry = WhiteDeck.findOne({}, {no: 1});
         var _id = _entry.no;
@@ -122,19 +124,18 @@ Meteor.methods({
 
   toggleJudge: function() {
     console.log('toggleJudge being called');
-    for (var i = 0; i < Meteor.users.find({'status.online': true}).fetch().length; i++) {
+    for (var i = 0; i < Meteor.users.find().fetch().length; i++) {
       //console.log(i, 'at i position');
-      if (Meteor.users.find({'status.online': true}).fetch()[i].judge === true) {
-        var currentId = Meteor.users.find({'status.online': true}).fetch()[i]._id;
+      if (Meteor.users.find().fetch()[i].judge === true) {
         //console.log('current judge found!');
-        Meteor.users.update({_id: currentId}, {$set: {'judge': false}});
-        if (i === (Meteor.users.find({'status.online': true}).fetch().length - 1)) {
+        Meteor.users.update({_id: Meteor.user()._id}, {$set: {'judge': false}});
+        if (i === (Meteor.users.find().fetch().length - 1)) {
           //console.log('current judge last in array, updating first to be judge');
-          Meteor.users.update({_id: Meteor.users.find({'status.online': true}).fetch()[0]._id}, {$set: {'judge': true}});
+          Meteor.users.update({_id: Meteor.users.find().fetch()[0]._id}, {$set: {'judge': true}});
           return;
         } else {
           //console.log('updating next user to be judge!');
-          Meteor.users.update({_id: Meteor.users.find({'status.online': true}).fetch()[++i]._id}, {$set: {'judge': true}});
+          Meteor.users.update({_id: Meteor.users.find().fetch()[++i]._id}, {$set: {'judge': true}});
           return;
         }
       }
