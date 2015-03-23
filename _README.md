@@ -1,6 +1,6 @@
 # Cards Against Sobriety
 
-> Play Cards Against Humanity & (obviously) get drunk, even if your deck or your friends aren't close by.
+Play Cards Against Humanity & (obviously) get drunk, even if your deck or your friends aren't close by.
 
 ## Team
 
@@ -34,14 +34,14 @@ From within the root directory:
 
 Install Meteor: curl https://install.meteor.com/ | sh
 
-Add dependencies: meteor add <package>
+Add dependencies: meteor add [following packages]
 
 meteor-platform, insecure, accounts-ui, accounts-password, twbs:bootstrap,
 sanjo:jasmine, velocity:html-reporter, mizzao:user-status
 
 ### Roadmap
 
-View the project roadmap [here](https://waffle.io/whiskey-and-cake/whiskey-and-cake-redux)
+View the project roadmap [here](https://waffle.io/whiskey-and-cake/whiskey-and-cake-redux).
 
 
 ## Contributing
