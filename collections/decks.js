@@ -1,20 +1,22 @@
-// shuffled decks
+// create shuffled decks
 WhiteDeck = new Meteor.Collection("WhiteDeck");
 BlackDeck = new Meteor.Collection("BlackDeck");
 
-// collection with all user hands
+// create collection with all user hands
 PlayerHand = new Meteor.Collection("PlayerHand");
 
-// collection of all cards on the game table
+// create collection of all cards on the game table (one black card & all played white cards)
 GameBoard = new Meteor.Collection("GameBoard");
 
-// collection of that round's question and the winning answer
+// create collection of that round's question and the winning answer
 RoundInfo = new Meteor.Collection("RoundInfo");
 
 Meteor.methods({
+  // starts new game
   newGame: function() {
     Meteor.users.remove({});
   },
+
   // function deals a player hand at the beginning of the game
   dealHand: function() {
     var rng = Math.round(Math.random() * (Meteor.users.find().fetch().length - 1));
@@ -57,7 +59,6 @@ Meteor.methods({
   },
 
   // adds card to game board with the user id and removes from playerhand
-  // added username
   playCard: function(card) {
     PlayerHand.remove({no: card.no});
     GameBoard.insert({
@@ -122,10 +123,12 @@ Meteor.methods({
 
   },
 
+  // clears gameboard & starts new round
   clearGameBoard: function() {
     GameBoard.remove({});
   },
 
+  // rotates judge role after each round
   toggleJudge: function() {
     console.log('toggleJudge being called');
     for (var i = 0; i < Meteor.users.find().fetch().length; i++) {

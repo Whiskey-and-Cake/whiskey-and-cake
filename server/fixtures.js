@@ -8,10 +8,10 @@ WhiteDeck.remove({});
 BlackDeck.remove({});
 PlayerHand.remove({});
 GameBoard.remove({});
-Meteor.users.remove({});
 RoundInfo.remove({});
 
 // in-place shuffle algorithm for CardsMaster
+// cards are shuffled prior to instantiating the database
 for (var i=0; i<CardsMaster.length; i++) {
   var j = Math.floor(Math.random() * i);
   var hole = CardsMaster[i];
@@ -50,6 +50,11 @@ if (WhiteDeck.find().count() === 0) {
   }
 }
 
+/* USERS */
+
+Meteor.users.remove({});
+
+// fields added to Meteor.user on instantiation
 Accounts.onCreateUser(function(options, user) {
     user.score = 0;
     user.judge = false;
