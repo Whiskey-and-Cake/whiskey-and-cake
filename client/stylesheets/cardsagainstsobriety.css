@@ -4,6 +4,23 @@
   width: 1350px;
 }
 
+.playerButton {
+  background-color: white;
+  border: 3px solid black;
+  border-radius: 7px;
+  padding: 5px 15px;
+  box-shadow: 3px 3px;
+}
+
+.playerButton:focus {
+  outline: 0;
+}
+
+.playerButton:active {
+  box-shadow: none;
+  transform: translate(3px, 3px);
+}
+
 /****** Navbar Group ******/
 .navbar {
   margin-bottom: 0;
@@ -21,8 +38,7 @@ header {
   background-color: black;
 }
 
-#login-buttons a,
-.playerButton {
+#login-buttons a {
   background-color: black;
   text-decoration: none;
   color: white;
@@ -30,6 +46,7 @@ header {
 
 .btn-default, .btn-default:hover, .btn-default:active {
   background-color: black;
+  outline: 0;
 }
 
 .btn {
@@ -158,11 +175,6 @@ header {
 .roundCounter {
   float: right;
 }
-
-#nextRound {
-  color: black;
-  background-color: white;
-}
 /* End of Gameboard Group **/
 
 
@@ -173,17 +185,24 @@ header {
   padding-bottom: 30px;
 }
 
-.playerButton {
-  border: 1px solid white;
-  width: 5em;
-}
-
 .text {
   text-align: center;
 }
 
 .playCard {
   display: inline-block;
+}
+
+#dealHand, #clearBoard {
+  background-color: black;
+  border: 3px solid white;
+  box-shadow: 3px 3px white;
+  width: 7em;
+  margin-right: 5px;
+}
+
+#dealHand:active, #clearBoard:active {
+  box-shadow: none;
 }
 /* End of Playerhand Group */
 

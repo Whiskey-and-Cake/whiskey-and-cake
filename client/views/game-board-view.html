@@ -15,9 +15,9 @@
        
       <div class="roundCounter">
         <!-- Keep track of round progress -->
-        {{#if winnerChosen}}
-          <button id="nextRound">Let's play another, you smarmy wench</button>
-        {{else}}      
+        <!--{{#if winnerChosen}}-->
+          <button class="playerButton" id="nextRound">Let's play another, you smarmy wench</button>
+        <!--{{else}}      -->
           {{#if allCardsPlayed}}
             <h3>ROUND OVER</h3>
           {{else}}
@@ -31,7 +31,7 @@
             </p>
           {{/if}}  
        
-        {{/if}}
+        <!--{{/if}}-->
       </div>
     </div>
 
