@@ -132,14 +132,15 @@ Meteor.methods({
 
   // rotates judge role after each round
   toggleJudge: function() {
-    for (var i = 0; i < Meteor.users.find().fetch().length; i++) {
-      if (Meteor.users.find().fetch()[i].judge === true) {
-        Meteor.users.update({_id: Meteor.user()._id}, {$set: {'judge': false}});
-        if (i === (Meteor.users.find().fetch().length - 1)) {
-          Meteor.users.update({_id: Meteor.users.find().fetch()[0]._id}, {$set: {'judge': true}});
+    for (var i = 0; i < Meteor.users.find({'status.online': true}).fetch().length; i++) {
+      if (Meteor.users.find({'status.online': true}).fetch()[i].judge === true) {
+        var currentId = Meteor.users.find({'status.online': true}).fetch()[i]._id;
+        Meteor.users.update({_id: Meteor.user().currentId}, {$set: {'judge': false}});
+        if (i === (Meteor.users.find({'status.online': true}).fetch().length - 1)) {
+          Meteor.users.update({_id: Meteor.users.find({'status.online': true}).fetch()[0]._id}, {$set: {'judge': true}});
           return;
         } else {
-          Meteor.users.update({_id: Meteor.users.find().fetch()[++i]._id}, {$set: {'judge': true}});
+          Meteor.users.update({_id: Meteor.users.find({'status.online': true}).fetch()[++i]._id}, {$set: {'judge': true}});
           return;
         }
       }
