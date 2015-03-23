@@ -1,6 +1,6 @@
-# Project Name
+# Cards Against Sobriety
 
-> Pithy project description
+Play Cards Against Humanity & (obviously) get drunk, even if your deck or your friends aren't close by.
 
 ## Team
 
@@ -24,11 +24,7 @@
 
 ## Requirements
 
-- Node 0.10.x
-- Redis 2.6.x
-- Postgresql 9.1.x
-- etc
-- etc
+- Meteor 1.0.4.2
 
 ## Development
 
@@ -36,15 +32,16 @@
 
 From within the root directory:
 
-```sh
-sudo npm install -g bower
-npm install
-bower install
-```
+Install Meteor: curl https://install.meteor.com/ | sh
+
+Add dependencies: meteor add [following packages]
+
+meteor-platform, insecure, accounts-ui, accounts-password, twbs:bootstrap,
+sanjo:jasmine, velocity:html-reporter, mizzao:user-status
 
 ### Roadmap
 
-View the project roadmap [here](LINK_TO_PROJECT_ISSUES)
+View the project roadmap [here](https://waffle.io/whiskey-and-cake/whiskey-and-cake-redux).
 
 
 ## Contributing
