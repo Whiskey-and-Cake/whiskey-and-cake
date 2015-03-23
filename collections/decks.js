@@ -9,9 +9,9 @@ PlayerHand = new Meteor.Collection("PlayerHand");
 GameBoard = new Meteor.Collection("GameBoard");
 
 // Currently this collection provides a check for whether the round is over
+// This is done by initializing a roundOver property of this collection when the judge picks a winner
+// Then that property is deleted when a new round is started
 RoundInfo = new Meteor.Collection("RoundInfo");
-// Initializes RoundInfo with a roundOver variable, used for checking whether the round is over.
-//RoundInfo.insert({roundOver: null});
 
 Meteor.methods({
   // starts new game
@@ -61,12 +61,9 @@ Meteor.methods({
   // replenishes white cards in the player's hand
   drawWhite: function() {
     var userArray = Meteor.users.find({'status.online': true}).fetch();
-    console.log('draw white before the for loop');
     for (var i = 0; i < userArray.length; i++) {
       while (PlayerHand.find({owner: userArray[i]._id}).fetch().length < 10) {
-        console.log('drawing white card');
         var _entry = WhiteDeck.findOne({}, {no: 1});
-        console.log(_entry, 'this is WhiteDeck.findOne({no: 1)');
         var _entryId = _entry.no;
         PlayerHand.insert({
           no: _entry.no,
@@ -111,18 +108,15 @@ Meteor.methods({
     Meteor.users.update({_id: cardOwner}, {$inc: {'score': 1}});
   },
 
-  // signals the end of the round by setting roundOver to true
+  // signals the end of the inserting a roundOver property and setting it to true
   endRound: function(){
-    // var round = RoundInfo.findOne({});
-    // RoundInfo.update({_id: round._id}, {$set: {roundOver: true}});
     RoundInfo.insert({roundOver: true})
   },
 
-  // resets the round by setting roundOver to false
+  // resets the round by removing the roundOver property
   newRound: function(){
-    // RoundInfo.remove({});
-    // var round = RoundInfo.findOne({});
-    // RoundInfo.update({_id: round._id}, {$set: {roundOver: false}});
+    var round = RoundInfo.findOne({});
+    RoundInfo.remove({_id: round._id});
   },
 
   // Clear losing cards from the gameboard by clearing the entire board
