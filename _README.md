@@ -35,14 +35,9 @@ From within the root directory:
 Install Meteor: curl https://install.meteor.com/ | sh
 
 Add dependencies: meteor add <package>
-meteor-platform
-insecure
-accounts-ui
-accounts-password
-twbs:bootstrap
-sanjo:jasmine
-velocity:html-reporter
-mizzao:user-status
+
+meteor-platform, insecure, accounts-ui, accounts-password, twbs:bootstrap,
+sanjo:jasmine, velocity:html-reporter, mizzao:user-status
 
 ### Roadmap
 
