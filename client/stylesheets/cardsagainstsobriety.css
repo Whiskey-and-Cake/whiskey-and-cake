@@ -21,6 +21,12 @@
   transform: translate(3px, 3px);
 }
 
+.footer {
+  padding-top: 15px;
+  font-family: 'Pinyon Script', cursive;
+  font-size: 27px;
+}
+
 /****** Navbar Group ******/
 .navbar {
   margin-bottom: 0;
@@ -34,6 +40,11 @@
   text-overflow: clip;
 }
 
+a:hover, a:focus {
+  color: white;
+  outline: 0;
+}
+
 header {
   background-color: black;
 }
@@ -44,7 +55,7 @@ header {
   color: white;
 }
 
-.btn-default, .btn-default:hover, .btn-default:active {
+.btn-default, .btn-default:hover, .btn-default:active, .btn-default:visited {
   background-color: black;
   outline: 0;
 }
@@ -55,6 +66,10 @@ header {
   transform: translateY(25%);
   border-radius: 0;
   border: none;
+}
+
+.btn:focus, .btn:active {
+  outline: 0;
 }
 
 .accounts-dialog label {
@@ -89,7 +104,8 @@ header {
 }
 
 #login-dropdown-list {
-  left: -50px;
+  left: -175px;
+  top: 40px;
 }
 
 /*** End of Navbar Group ***/
