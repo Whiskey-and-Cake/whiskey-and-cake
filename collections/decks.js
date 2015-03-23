@@ -45,7 +45,7 @@ Meteor.methods({
   drawWhite: function() {
     for (var i = 0; i < PlayerHand.find({owner: Meteor.user()._id}).fetch().length; i++) {
       while (PlayerHand.find({owner: Meteor.user()._id}).fetch().length < 10) {
-        var _entry = WhiteDeck.findOne({}, {no: 1});
+        var _entry = WhiteDeck.findOne({no: 1});
         var _id = _entry.no;
         PlayerHand.insert({
           no: _entry.no,
