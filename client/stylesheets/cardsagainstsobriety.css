@@ -158,6 +158,11 @@ header {
 .roundCounter {
   float: right;
 }
+
+#nextRound {
+  color: black;
+  background-color: white;
+}
 /* End of Gameboard Group **/
 
 
