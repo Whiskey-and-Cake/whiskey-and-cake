@@ -13,14 +13,11 @@ GameBoard = new Meteor.Collection("GameBoard");
 // Then that property is deleted when a new round is started
 RoundInfo = new Meteor.Collection("RoundInfo");
 
+//This is where we hold our methods that get called from the client side
 Meteor.methods({
-  // starts new game
-  newGame: function() {
-    Meteor.users.remove({});
-  },
-
   // function deals a player hand at the beginning of the game
   dealHand: function() {
+    //userArray holds an array of players that are logged in using the user-status package
     var userArray = Meteor.users.find({'status.online': true}).fetch();
     var judgeCounter = 0;
     for (var i = 0; i < userArray.length; i++) {
@@ -28,20 +25,23 @@ Meteor.methods({
         judgeCounter++;
       }
     }
+    //if the deal button was pushed and no judges are assigned alrady, assign one randomly
     if (judgeCounter === 0) {
       var rng = Math.round(Math.random() * (userArray.length - 1));
       var randomUserId = userArray[rng]._id;
       Meteor.users.update({_id: randomUserId}, {$set: {'judge': true}});
     }
+    //if the deal button was pushed and there is 1 judge already, toggle that judge
     if (judgeCounter === 1) {
-      Meteor.call("toggleJudge", function (err) {
+      Meteor.call("toggleJudge", function (err) { //function at the end of this file
         if (err) {
           throw err;
         }
       });
     }
-    
+    //iterate over all active players and insert up to 10 cards in their hand
     for (var j = 0; j < userArray.length; j++) {
+      //adding .fetch() onto the end of the find method returns an array, thus we can use length
       if (!(PlayerHand.find({owner: userArray[j]._id}).fetch().length === 10)) {
         for (var i = 0; i < 10; i++) {
           var _entry = WhiteDeck.findOne({}, {no: 1});
@@ -145,15 +145,25 @@ Meteor.methods({
 
   // rotates judge role after each round
   toggleJudge: function() {
-    for (var i = 0; i < Meteor.users.find({'status.online': true}).fetch().length; i++) {
-      if (Meteor.users.find({'status.online': true}).fetch()[i].judge === true) {
-        var currentId = Meteor.users.find({'status.online': true}).fetch()[i]._id;
+    var userArray = Meteor.users.find({'status.online': true}).fetch();
+    //iterate through all active users
+    for (var i = 0; i < userArray.length; i++) {
+      //if that user is the judge
+      if (userArray[i].judge === true) {
+        //take his unique _.id
+        var currentId = userArray[i]._id;
+        //set his judge property to false
         Meteor.users.update({_id: currentId}, {$set: {'judge': false}});
-        if (i === (Meteor.users.find({'status.online': true}).fetch().length - 1)) {
-          Meteor.users.update({_id: Meteor.users.find({'status.online': true}).fetch()[0]._id}, {$set: {'judge': true}});
+        //if that user is the final element in the array
+        if (i === (userArray.length - 1)) {
+          //set the judge property to true for the first position in the array
+          Meteor.users.update({_id: userArray[0]._id}, {$set: {'judge': true}});
+          //break out
           return;
         } else {
-          Meteor.users.update({_id: Meteor.users.find({'status.online': true}).fetch()[++i]._id}, {$set: {'judge': true}});
+          //for any other position make the next array index the judge
+          Meteor.users.update({_id: userArray[++i]._id}, {$set: {'judge': true}});
+          //breakout
           return;
         }
       }
