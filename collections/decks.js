@@ -8,8 +8,10 @@ PlayerHand = new Meteor.Collection("PlayerHand");
 // create collection of all cards on the game table (one black card & all played white cards)
 GameBoard = new Meteor.Collection("GameBoard");
 
-// create collection of that round's question and the winning answer
+// Currently this collection provides a check for whether the round is over
 RoundInfo = new Meteor.Collection("RoundInfo");
+// Initializes RoundInfo with a roundOver variable, used for checking whether the round is over.
+RoundInfo.insert({roundOver: null});
 
 Meteor.methods({
   // starts new game
@@ -90,18 +92,18 @@ Meteor.methods({
     Meteor.users.update({_id: cardOwner}, {$inc: {'score': 1}});
   },
 
-  // used for checking if the round is over
+  // signals the end of the round by setting roundOver to true
   endRound: function(){
-    // var round = RoundInfo.findOne({});
-    // RoundInfo.update({_id: round._id}, {$set: {roundOver: true}});
-    RoundInfo.insert({roundOver: true})
+    var round = RoundInfo.findOne({});
+    RoundInfo.update({_id: round._id}, {$set: {roundOver: true}});
+    // RoundInfo.insert({roundOver: true})
   },
 
-  // resets the round
+  // resets the round by setting roundOver to false
   newRound: function(){
-    RoundInfo.remove({});
-    // var round = RoundInfo.findOne({});
-    // RoundInfo.update({_id: round._id}, {$set: {roundOver: false}});
+    // RoundInfo.remove({});
+    var round = RoundInfo.findOne({});
+    RoundInfo.update({_id: round._id}, {$set: {roundOver: false}});
   },
 
   // Clear losing cards from the gameboard by clearing the entire board
@@ -130,18 +132,13 @@ Meteor.methods({
 
   // rotates judge role after each round
   toggleJudge: function() {
-    console.log('toggleJudge being called');
     for (var i = 0; i < Meteor.users.find().fetch().length; i++) {
-      //console.log(i, 'at i position');
       if (Meteor.users.find().fetch()[i].judge === true) {
-        //console.log('current judge found!');
         Meteor.users.update({_id: Meteor.user()._id}, {$set: {'judge': false}});
         if (i === (Meteor.users.find().fetch().length - 1)) {
-          //console.log('current judge last in array, updating first to be judge');
           Meteor.users.update({_id: Meteor.users.find().fetch()[0]._id}, {$set: {'judge': true}});
           return;
         } else {
-          //console.log('updating next user to be judge!');
           Meteor.users.update({_id: Meteor.users.find().fetch()[++i]._id}, {$set: {'judge': true}});
           return;
         }
