@@ -21,13 +21,13 @@ Meteor.methods({
 
   // function deals a player hand at the beginning of the game
   dealHand: function() {
+    var userArray = Meteor.users.find().fetch();
     var rng = Math.round(Math.random() * (Meteor.users.find().fetch().length - 1));
     var randomUserId = Meteor.users.find().fetch()[rng]._id;
     Meteor.users.update({_id: randomUserId}, {$set: {'judge': true}});
     
-    for (var j = 0; j<Meteor.users.find().fetch().length; j++) {
-      if (!PlayerHand.find({owner: Meteor.user()._id}).fetch()) {
-        var userArray = Meteor.users.find().fetch();
+    for (var j = 0; j < userArray.length; j++) {
+      if (!(PlayerHand.find({owner: userArray[j]._id}).fetch().length === 10)) {
         for (var i = 0; i < 10; i++) {
           var _entry = WhiteDeck.findOne({}, {no: 1});
           var _id = _entry.no;
