@@ -1,6 +1,6 @@
 # Cards Against Sobriety
 
-> Play Cards Against Humanity even if your deck or your friends aren't close by.
+> Play Cards Against Humanity & (obviously) get drunk, even if your deck or your friends aren't close by.
 
 ## Team
 
