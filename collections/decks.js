@@ -21,10 +21,25 @@ Meteor.methods({
 
   // function deals a player hand at the beginning of the game
   dealHand: function() {
-    var userArray = Meteor.users.find().fetch();
-    var rng = Math.round(Math.random() * (Meteor.users.find().fetch().length - 1));
-    var randomUserId = Meteor.users.find().fetch()[rng]._id;
-    Meteor.users.update({_id: randomUserId}, {$set: {'judge': true}});
+    var userArray = Meteor.users.find({'status.online': true}).fetch();
+    var judgeCounter = 0;
+    for (var i = 0; i < userArray.length; i++) {
+      if (userArray[i].judge === true) {
+        judgeCounter++;
+      }
+    }
+    if (judgeCounter === 0) {
+      var rng = Math.round(Math.random() * (userArray.length - 1));
+      var randomUserId = userArray[rng]._id;
+      Meteor.users.update({_id: randomUserId}, {$set: {'judge': true}});
+    }
+    if (judgeCounter === 1) {
+      Meteor.call("toggleJudge", function (err) {
+        if (err) {
+          throw err;
+        }
+      });
+    }
     
     for (var j = 0; j < userArray.length; j++) {
       if (!(PlayerHand.find({owner: userArray[j]._id}).fetch().length === 10)) {
@@ -135,7 +150,7 @@ Meteor.methods({
     for (var i = 0; i < Meteor.users.find({'status.online': true}).fetch().length; i++) {
       if (Meteor.users.find({'status.online': true}).fetch()[i].judge === true) {
         var currentId = Meteor.users.find({'status.online': true}).fetch()[i]._id;
-        Meteor.users.update({_id: Meteor.user().currentId}, {$set: {'judge': false}});
+        Meteor.users.update({_id: currentId}, {$set: {'judge': false}});
         if (i === (Meteor.users.find({'status.online': true}).fetch().length - 1)) {
           Meteor.users.update({_id: Meteor.users.find({'status.online': true}).fetch()[0]._id}, {$set: {'judge': true}});
           return;
