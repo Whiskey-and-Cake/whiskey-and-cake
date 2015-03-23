@@ -11,7 +11,7 @@ GameBoard = new Meteor.Collection("GameBoard");
 // Currently this collection provides a check for whether the round is over
 RoundInfo = new Meteor.Collection("RoundInfo");
 // Initializes RoundInfo with a roundOver variable, used for checking whether the round is over.
-RoundInfo.insert({roundOver: null});
+//RoundInfo.insert({roundOver: null});
 
 Meteor.methods({
   // starts new game
@@ -21,13 +21,28 @@ Meteor.methods({
 
   // function deals a player hand at the beginning of the game
   dealHand: function() {
-    var rng = Math.round(Math.random() * (Meteor.users.find().fetch().length - 1));
-    var randomUserId = Meteor.users.find().fetch()[rng]._id;
-    Meteor.users.update({_id: randomUserId}, {$set: {'judge': true}});
+    var userArray = Meteor.users.find({'status.online': true}).fetch();
+    var judgeCounter = 0;
+    for (var i = 0; i < userArray.length; i++) {
+      if (userArray[i].judge === true) {
+        judgeCounter++;
+      }
+    }
+    if (judgeCounter === 0) {
+      var rng = Math.round(Math.random() * (userArray.length - 1));
+      var randomUserId = userArray[rng]._id;
+      Meteor.users.update({_id: randomUserId}, {$set: {'judge': true}});
+    }
+    if (judgeCounter === 1) {
+      Meteor.call("toggleJudge", function (err) {
+        if (err) {
+          throw err;
+        }
+      });
+    }
     
-    for (var j = 0; j<Meteor.users.find().fetch().length; j++) {
-      if (!PlayerHand.find({owner: Meteor.user()._id}).fetch()) {
-        var userArray = Meteor.users.find().fetch();
+    for (var j = 0; j < userArray.length; j++) {
+      if (!(PlayerHand.find({owner: userArray[j]._id}).fetch().length === 10)) {
         for (var i = 0; i < 10; i++) {
           var _entry = WhiteDeck.findOne({}, {no: 1});
           var _id = _entry.no;
@@ -45,17 +60,21 @@ Meteor.methods({
 
   // replenishes white cards in the player's hand
   drawWhite: function() {
-    for (var i = 0; i < PlayerHand.find({owner: Meteor.user()._id}).fetch().length; i++) {
-      while (PlayerHand.find({owner: Meteor.user()._id}).fetch().length < 10) {
-        var _entry = WhiteDeck.findOne({no: 1});
-        var _id = _entry.no;
+    var userArray = Meteor.users.find({'status.online': true}).fetch();
+    console.log('draw white before the for loop');
+    for (var i = 0; i < userArray.length; i++) {
+      while (PlayerHand.find({owner: userArray[i]._id}).fetch().length < 10) {
+        console.log('drawing white card');
+        var _entry = WhiteDeck.findOne({}, {no: 1});
+        console.log(_entry, 'this is WhiteDeck.findOne({no: 1)');
+        var _entryId = _entry.no;
         PlayerHand.insert({
           no: _entry.no,
           text: _entry.text,
           expansion: _entry.expansion,
-          owner: Meteor.user()._id
+          owner: userArray[i]._id
         });
-        WhiteDeck.remove({no: _id});
+        WhiteDeck.remove({no: _entryId});
       }
     }
   },
@@ -94,16 +113,16 @@ Meteor.methods({
 
   // signals the end of the round by setting roundOver to true
   endRound: function(){
-    var round = RoundInfo.findOne({});
-    RoundInfo.update({_id: round._id}, {$set: {roundOver: true}});
-    // RoundInfo.insert({roundOver: true})
+    // var round = RoundInfo.findOne({});
+    // RoundInfo.update({_id: round._id}, {$set: {roundOver: true}});
+    RoundInfo.insert({roundOver: true})
   },
 
   // resets the round by setting roundOver to false
   newRound: function(){
     // RoundInfo.remove({});
-    var round = RoundInfo.findOne({});
-    RoundInfo.update({_id: round._id}, {$set: {roundOver: false}});
+    // var round = RoundInfo.findOne({});
+    // RoundInfo.update({_id: round._id}, {$set: {roundOver: false}});
   },
 
   // Clear losing cards from the gameboard by clearing the entire board
@@ -132,14 +151,15 @@ Meteor.methods({
 
   // rotates judge role after each round
   toggleJudge: function() {
-    for (var i = 0; i < Meteor.users.find().fetch().length; i++) {
-      if (Meteor.users.find().fetch()[i].judge === true) {
-        Meteor.users.update({_id: Meteor.user()._id}, {$set: {'judge': false}});
-        if (i === (Meteor.users.find().fetch().length - 1)) {
-          Meteor.users.update({_id: Meteor.users.find().fetch()[0]._id}, {$set: {'judge': true}});
+    for (var i = 0; i < Meteor.users.find({'status.online': true}).fetch().length; i++) {
+      if (Meteor.users.find({'status.online': true}).fetch()[i].judge === true) {
+        var currentId = Meteor.users.find({'status.online': true}).fetch()[i]._id;
+        Meteor.users.update({_id: currentId}, {$set: {'judge': false}});
+        if (i === (Meteor.users.find({'status.online': true}).fetch().length - 1)) {
+          Meteor.users.update({_id: Meteor.users.find({'status.online': true}).fetch()[0]._id}, {$set: {'judge': true}});
           return;
         } else {
-          Meteor.users.update({_id: Meteor.users.find().fetch()[++i]._id}, {$set: {'judge': true}});
+          Meteor.users.update({_id: Meteor.users.find({'status.online': true}).fetch()[++i]._id}, {$set: {'judge': true}});
           return;
         }
       }

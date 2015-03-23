@@ -62,6 +62,7 @@ Template.playerHand.events({
   "click #dealHand": function(){
 
     var user = Meteor.user();
+    console.log(user, 'this is the user');
     var numHandCards = PlayerHand.find({owner: user._id}).count();
     if(numHandCards >= 10){
       //console.log('You already have ', numHandCards, ' why not try using them?');
