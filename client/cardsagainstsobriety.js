@@ -4,6 +4,8 @@ if (Meteor.isClient) {
   })
 }
 
+//with autopublish turned off, subscribe functions are necessary to get what the server-side is
+//publishing
 Meteor.subscribe('WhiteDeck');
 Meteor.subscribe('BlackDeck');
 Meteor.subscribe('PlayerHand');
