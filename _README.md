@@ -32,8 +32,9 @@
 
 From within the root directory:
 
-curl https://install.meteor.com/ | sh
-meteor add ...
+Install Meteor: curl https://install.meteor.com/ | sh
+
+Add dependencies: meteor add <package>
 meteor-platform
 insecure
 accounts-ui
