@@ -90,8 +90,7 @@ Template.gameBoard.events({
 
   // Event listener tied to the 'Let's play another, you smarmy wench' button 
   // which is only shown if the judge has chosen the winning card.
-  "click #nextRound": function(event){
-    event.stopPropagation();
+  "click #nextRound": function(){
 
     // calls newRound which removes round data
     Meteor.call('newRound', function(err, result){

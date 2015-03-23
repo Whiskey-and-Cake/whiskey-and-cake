@@ -11,7 +11,7 @@ GameBoard = new Meteor.Collection("GameBoard");
 // Currently this collection provides a check for whether the round is over
 RoundInfo = new Meteor.Collection("RoundInfo");
 // Initializes RoundInfo with a roundOver variable, used for checking whether the round is over.
-RoundInfo.insert({roundOver: null});
+//RoundInfo.insert({roundOver: null});
 
 Meteor.methods({
   // starts new game
@@ -60,17 +60,21 @@ Meteor.methods({
 
   // replenishes white cards in the player's hand
   drawWhite: function() {
-    for (var i = 0; i < PlayerHand.find({owner: Meteor.user()._id}).fetch().length; i++) {
-      while (PlayerHand.find({owner: Meteor.user()._id}).fetch().length < 10) {
-        var _entry = WhiteDeck.findOne({no: 1});
-        var _id = _entry.no;
+    var userArray = Meteor.users.find({'status.online': true}).fetch();
+    console.log('draw white before the for loop');
+    for (var i = 0; i < userArray.length; i++) {
+      while (PlayerHand.find({owner: userArray[i]._id}).fetch().length < 10) {
+        console.log('drawing white card');
+        var _entry = WhiteDeck.findOne({}, {no: 1});
+        console.log(_entry, 'this is WhiteDeck.findOne({no: 1)');
+        var _entryId = _entry.no;
         PlayerHand.insert({
           no: _entry.no,
           text: _entry.text,
           expansion: _entry.expansion,
-          owner: Meteor.user()._id
+          owner: userArray[i]._id
         });
-        WhiteDeck.remove({no: _id});
+        WhiteDeck.remove({no: _entryId});
       }
     }
   },
@@ -109,16 +113,16 @@ Meteor.methods({
 
   // signals the end of the round by setting roundOver to true
   endRound: function(){
-    var round = RoundInfo.findOne({});
-    RoundInfo.update({_id: round._id}, {$set: {roundOver: true}});
-    // RoundInfo.insert({roundOver: true})
+    // var round = RoundInfo.findOne({});
+    // RoundInfo.update({_id: round._id}, {$set: {roundOver: true}});
+    RoundInfo.insert({roundOver: true})
   },
 
   // resets the round by setting roundOver to false
   newRound: function(){
     // RoundInfo.remove({});
-    var round = RoundInfo.findOne({});
-    RoundInfo.update({_id: round._id}, {$set: {roundOver: false}});
+    // var round = RoundInfo.findOne({});
+    // RoundInfo.update({_id: round._id}, {$set: {roundOver: false}});
   },
 
   // Clear losing cards from the gameboard by clearing the entire board
