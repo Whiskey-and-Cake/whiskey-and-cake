@@ -1,6 +1,3 @@
-//Cmd line if meteor running on port 3000 already.
-//kill -9 `ps ax | grep node | grep meteor | awk '{print $1}'`
-
 /* DECK INSTANTIATION */
 
 // on meteor start, clear current decks
